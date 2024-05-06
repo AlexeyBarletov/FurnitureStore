@@ -13,8 +13,11 @@ struct ContentView: View {
     private let numberTwoColorGradient = Color(red: 50 / 255, green: 75 / 255, blue: 53 / 255)
     @State private var showSplash = true
     @State private var showElements = false
+    var eeee =  [Color(red: 175 / 255, green: 224 / 255, blue: 197 / 255),
+                Color(red: 50 / 255, green: 75 / 255, blue: 53 / 255)]
     
     var body: some View {
+        NavigationView {
             VStack {
                 if showElements {
                     ZStack {
@@ -27,6 +30,7 @@ struct ContentView: View {
                 }
             }
         }
+    }
     var setupTextAndButtonView: some View {
         VStack(spacing: 40) {
             Text("169.ru")
@@ -36,7 +40,7 @@ struct ContentView: View {
             Image("image")
                 .frame(width: 296, height: 212)
             Spacer()
-            Button(action: { showElements = true}) {
+            NavigationLink(destination: ProductDetails()) {
                 Text("Get Started")
                     .frame(width: 300, height: 55)
                     .background(Color.white)
@@ -54,6 +58,7 @@ struct ContentView: View {
             textLabel
         }
     }
+
     var  displayPicture: some View {
         VStack {
             if showSplash {
@@ -63,11 +68,9 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 self.showSplash = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
                     self.showElements = true
-                }
             }
         }
     }
@@ -78,18 +81,20 @@ struct ContentView: View {
                 .font(.system(size: 16))
                 .bold()
                 .foregroundStyle(.white)
-            Button("Sing in here") { }
-            .font(.system(size: 28))
-            Divider()
-                .background(Color.white)
-                .frame(height: 1)
-                .padding(.leading, 70).padding(.trailing, 70)
+            NavigationLink(destination: RegistrationScreen()) {
+                    Text("Sing in here")
+                    .font(.system(size: 28)).bold()
+            }
+                Divider()
+                    .background(Color.white)
+                    .frame(height: 1)
+                    .padding(.leading, 70)
+                    .padding(.trailing, 70)
         }
         .padding()
         .bold()
-        .foregroundStyle(.white)
+         .foregroundStyle(.white)
     }
-    
     
     var gradientLayer: some View {
         LinearGradient(colors:
@@ -100,5 +105,7 @@ struct ContentView: View {
     }
 }
 #Preview {
-    ContentView()
+   // ContentView()
+   // RegistrationScreen()
+    ProductDetails()
 }
