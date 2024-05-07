@@ -9,24 +9,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    private let numberOneColorGradient = Color(red: 175 / 255, green: 224 / 255, blue: 197 / 255)
-    private let numberTwoColorGradient = Color(red: 50 / 255, green: 75 / 255, blue: 53 / 255)
     @State private var showSplash = true
-    @State private var showElements = false
-    var eeee =  [Color(red: 175 / 255, green: 224 / 255, blue: 197 / 255),
-                Color(red: 50 / 255, green: 75 / 255, blue: 53 / 255)]
-    
     var body: some View {
         NavigationView {
             VStack {
-                if showElements {
-                    ZStack {
-                        gradientLayer
-                        setupTextAndButtonView
-                    }
-                } else {
-                    displayPicture
-                    
+                ZStack {
+                    gradientLayer
+                    setupTextAndButtonView
                 }
             }
         }
@@ -37,15 +26,14 @@ struct ContentView: View {
                 .font(.system(size: 40))
                 .foregroundColor(.white)
                 .bold()
-            Image("image")
-                .frame(width: 296, height: 212)
+            displayPicture
             Spacer()
             NavigationLink(destination: ProductDetails()) {
                 Text("Get Started")
                     .frame(width: 300, height: 55)
                     .background(Color.white)
                     .overlay(
-                        LinearGradient(gradient: Gradient(colors: [numberOneColorGradient, numberTwoColorGradient]),
+                        LinearGradient(gradient: Gradient(colors: [.numberOneColorGradient, .numberTwoColorGradient]),
                                        startPoint: .top,
                                        endPoint: .bottom)
                         .mask(Text("Get Started")
@@ -58,23 +46,25 @@ struct ContentView: View {
             textLabel
         }
     }
-
+    
     var  displayPicture: some View {
-        VStack {
-            if showSplash {
-                ProgressView()
-            } else {
-                AsyncImage(url: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuZkSVKI8fGbbe95vLuzwFPW9EguP-Gtih14VrrJnw2g&s"))
-            }
-        }
-        .onAppear {
-                self.showSplash = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-                    self.showElements = true
-            }
+            AsyncImage(url: URL(string: "https://encrypted-tbn0.g11static.com/images?q=tbn:ANd9GcTuZkSVKI8fGbbe95vLuzwFPW9EguP-Gtih14VrrJnw2g&s")) { element in //убрать 11 после буквы g
+                switch element {
+            case .empty:
+                Image(.imageNew)
+            case .success(let image):
+                    image
+                .resizable ()
+                .frame(width: 296, height: 212)
+                clipShape(.rect(cornerRadius: 20))
+            case .failure(_):
+                Image(.imageNew)
+            @unknown default:
+                fatalError()
+           }
         }
     }
-    
+
     var textLabel: some View {
         VStack(spacing: 12) {
             Text("Don't have an account?")
@@ -98,14 +88,15 @@ struct ContentView: View {
     
     var gradientLayer: some View {
         LinearGradient(colors:
-                        [numberOneColorGradient,
-                         numberTwoColorGradient],
+                        [.numberOneColorGradient,
+                         .numberTwoColorGradient],
                        startPoint: .top, endPoint: .bottom)
         .ignoresSafeArea(.all, edges: .all)
     }
 }
 #Preview {
-   // ContentView()
-   // RegistrationScreen()
-    ProductDetails()
+// ContentView()
+   RegistrationScreen()
+    // ProductDetails()
+// VertificationScreen()
 }

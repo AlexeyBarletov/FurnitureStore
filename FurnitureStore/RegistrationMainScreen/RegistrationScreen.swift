@@ -9,20 +9,18 @@ import SwiftUI
 import UIKit
 
 struct RegistrationScreen: View {
-    @State var  emailState = ""
     @State var  passwordState = ""
+    @State var text = ""
+    @State var password: Bool = false
+    @FocusState private var psswordFocusState: Bool
     
-    @FocusState var nameIsFocused: Bool
-    
-    var link = ContentView()
-    var listGradient =  [Color(red: 175 / 255, green: 224 / 255, blue: 197 / 255),
-                         Color(red: 50 / 255, green: 75 / 255, blue: 53 / 255)]
-    var colorCircle = #colorLiteral(red: 0.9437311888, green: 0.940849483, blue: 0.9499775767, alpha: 1)
-    
+    var placeholder: String = ""
+    var linkMainScreen = ContentView()
+    var viewModelRegistration = RegistrationMainViewModel()
     
     var body: some View {
         VStack(spacing: 0) {
-            link.gradientLayer
+            linkMainScreen.gradientLayer
             ZStack {
                 rectangle
                 rectangleView
@@ -32,7 +30,6 @@ struct RegistrationScreen: View {
         }
         .navigationBarBackButtonHidden(true)
     }
-    
     
     var rectangle: some View {
         VStack {
@@ -55,7 +52,7 @@ struct RegistrationScreen: View {
                         Text("Log in")
                         Text("Sing up")
                     }
-                    .makeGridient(colors: listGradient, startPoint: .top, endPoint: .bottom)
+                    .makeGridient(colors: [.numberOneColorGradient, .numberTwoColorGradient], startPoint: .top, endPoint: .bottom)
                 }
                 .font(.system(size: 15))
                 .bold()
@@ -64,19 +61,35 @@ struct RegistrationScreen: View {
             Spacer()
         }
     }
-    
     var textField: some View {
         VStack {
+            
+            
+//            var textFilds: some View {
+//                HStack(alignment: .center,  spacing: 8) {
+//                    TextField("", text: $viewModelVertificationScreen.firstTextField)
+//                        .focused($transfer, equals: .oneNumber)
+//                        .onChange(of: viewModelVertificationScreen.firstTextField) { _, newValue in
+//                            if newValue.count >= 1 {
+//                                transfer = .twoNumber
+//                            }
+//                        }
+//            
+//            
+//            
             VStack(alignment: .leading,  spacing: 40) {
                 Text("Number")
                     .padding(.all)
-                    .foregroundColor(Color(red: 100 / 255, green: 100 / 255, blue: 100 / 255))
+                    .foregroundColor(.myGreen)
                     .offset(y: 40)
                 HStack() {
-                    TextField("+7 (999) 999-99-99", text: $emailState)
-                        .foregroundColor(Color(red: 100 / 255, green: 100 / 255, blue: 100 / 255))
+                    TextField(placeholder, text: $text)
+                        .onChange(of: text, { oldValue, newValue in
+                            text = viewModelRegistration.format(with: "+X (XXX) XXX-XXXX", phone: oldValue)
+                        })
+                        .keyboardType(.numberPad)
+                        .foregroundColor(.myGreen)
                         .font(.system(size: 20))
-                    Image("see")
                 }
                 .padding(.trailing, 5)
                 Divider()
@@ -84,39 +97,56 @@ struct RegistrationScreen: View {
             }
             VStack(alignment: .leading,  spacing: 40) {
                 Text("Password")
+                    .foregroundColor(.myGreen)
                     .padding(.all)
-                    .foregroundColor(Color(red: 100 / 255, green: 100 / 255, blue: 100 / 255))
-                    .offset(y: 40)
+                
                 HStack() {
-                    TextField("Password", text: $passwordState)
-                        .foregroundColor(Color(red: 100 / 255, green: 100 / 255, blue: 100 / 255))
-                        .font(.system(size: 20))
+                    Group {
+                        if password {
+                            TextField("Password", text: $passwordState,
+                                      prompt: Text("Password"))
+                        } else {
+                            SecureField("Password", text: $passwordState,
+                                        prompt: Text("Password"))
+                        }
+                    }
+                    .padding(.bottom, 40)
+                    .foregroundColor(.myGreen)
+                    .font(.system(size: 20))
+                    Button {
+                        password.toggle()
+                    } label: {
+                        Image( password ? ImageResource.see : ImageResource.noSee)
+                    }
+                    .padding(.bottom, 40)
+
                 }
-                .padding(.trailing)
-                Divider()
-                    .padding(.top, -35)
             }
-            .padding(.bottom, 200)
+            .padding(.trailing)
+            Divider()
+                .padding(.top, -35)
         }
+        .padding(.bottom, 200)
     }
-    
-    var settupButton: some View {
-        VStack(spacing: 24) {
-            Spacer()
-            Text("Sing Up")
-                .frame(width: 300, height: 55)
-                .foregroundColor(.white)
-                .background(LinearGradient(gradient: Gradient(colors: listGradient), startPoint: .leading, endPoint: .trailing)).bold()
-                .cornerRadius(27)
-            VStack(spacing: 18) {
-                Text("Forgot your password?")
+}
+var settupButton: some View {
+    VStack(spacing: 24) {
+        Spacer()
+        Text("Sing Up")
+            .frame(width: 300, height: 55)
+            .foregroundColor(.white)
+            .background(LinearGradient(gradient: Gradient(colors: [.numberOneColorGradient, .numberTwoColorGradient]), startPoint: .leading, endPoint: .trailing)).bold()
+            .cornerRadius(27)
+        VStack(spacing: 18) {
+            Text("Forgot your password?")
+            NavigationLink(destination: VertificationScreen()) {
                 Text("Check Verification")
             }
-            .foregroundColor(Color(red: 100 / 255, green: 100 / 255, blue: 100 / 255))
-            .font(.system(size: 20))
-            .bold()
-            Divider().padding(.leading,70).padding(.trailing, 70)
         }
-        .padding(.bottom, 95)
+        .foregroundColor(.myGreen)
+        .font(.system(size: 20))
+        .bold()
+        Divider().padding(.leading,70).padding(.trailing, 70)
     }
+    .padding(.bottom, 95)
 }
