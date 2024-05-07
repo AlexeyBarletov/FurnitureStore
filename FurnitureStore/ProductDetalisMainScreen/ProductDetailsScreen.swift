@@ -8,19 +8,29 @@
 import SwiftUI
 
 struct ProductDetails: View {
-    @State var textProgreeView = ""
-    @State var totalChars = 0
-    @State var lastText = ""
+    
+    enum Constant {
+        static let buyNowText = "Buy now"
+        static let sofaElda = "Sofa Elda 900"
+        static let priceText = "Price: 999$"
+        static let articleText = "Article:"
+        static let numberText = "283564"
+        static let progressViewText = "Description: A sofa in a modern style is furniture without lush ornate decor. It has a simple or even futuristic appearance and sleek design."
+        static let reviewText = "Review"
+    }
+    
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var viewModelProductDetalis =  ProductDetalisMainViewModel()
     
     init() {
         UITextView.appearance().backgroundColor = .clear
     }
+    
     var body: some View {
-            VStack {
-                setupLabelButton
-                setupProgresView
-            }
+        VStack {
+            setupLabelButton
+            setupProgresView
+        }
         .navigationBarBackButtonHidden(true)
     }
     
@@ -28,37 +38,38 @@ struct ProductDetails: View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
         }, label: {
-            Text("Buy now")
+            Text(Constant.buyNowText)
                 .frame(width: 300, height: 55)
                 .makeGridient(colors: [.numberOneColorGradient, .numberTwoColorGradient], startPoint: .top, endPoint: .bottom)
                 .background(.white)
                 .clipShape(.rect(cornerRadius: 27))
+                .shadow(color: .black.opacity(0.25), radius: 1, y: 4)
         })
     }
     
     var setupLabelButton: some View {
         VStack() {
             HStack {
-                Text("Sofa Elda 900")
+                Text(Constant.sofaElda)
                     .foregroundColor(.myGreen)
                     .bold()
                     .font(.system(size: 20))
                 Spacer()
                 Button(action: {
                 }) {
-                    Image("love")
+                    Image(.love)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 18, height: 18)
                 }
             }
             .padding(.all)
-            Image("sofa")
+            Image(.sofa)
             HStack {
                 Spacer()
                 ZStack {
-                    Image("rectangle")
-                    Text("Price: 999$")
+                    Image(.rectangle)
+                    Text(Constant.priceText)
                 }
             }
             .foregroundColor(.myGreen)
@@ -75,16 +86,16 @@ struct ProductDetails: View {
                     .makeGridient(colors: [.numberOneColorGradient, .numberTwoColorGradient], startPoint: .top, endPoint: .bottom)
                 VStack {
                     HStack {
-                        Text("Article:")
+                        Text(Constant.articleText)
                             .bold()
-                        Text("283564")
+                        Text(Constant.numberText)
                             .font(.verdana(size: 16))
                         Spacer()
                     }
                     .foregroundStyle(.white)
-                    Text("Description: A sofa in a modern style is furniture without lush ornate decor. It has a simple or even futuristic appearance and sleek design.")
+                    Text(Constant.progressViewText)
                         .font(.verdana(size: 16))
-                    Text("Review")
+                    Text(Constant.reviewText)
                         .bold()
                     progreesView
                     buttonView
@@ -99,18 +110,13 @@ struct ProductDetails: View {
     var progreesView: some View {
         VStack {
             HStack(alignment: .top) {
-                TextEditor(text: $textProgreeView)
+                TextEditor(text: $viewModelProductDetalis.textFieldZero)
                     .frame(width: 285, height: 177)
                     .cornerRadius(25)
                     .scrollContentBackground(.hidden)
-                Text("\(totalChars) /150")
-                    .onChange(of: textProgreeView, { textProgreeView, newValue in
-                        totalChars = textProgreeView.count
-                        if totalChars <= 150 {
-                            lastText = textProgreeView
-                        } else {
-                            self.textProgreeView = lastText
-                        }
+                Text("\(viewModelProductDetalis.totalCharacter) /300")
+                    .onChange(of: viewModelProductDetalis.textFieldZero, { oldValue, newValue in
+                        viewModelProductDetalis.makeCharacters(newValue: newValue, oldValue: oldValue)
                     })
             }
             .font(.verdana(size: 14))

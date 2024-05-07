@@ -8,27 +8,98 @@
 import SwiftUI
 import UIKit
 
+
 struct RegistrationScreen: View {
+    
+    enum Constant {
+      static let singUPText = "Sing Up"
+        static let loginText = "Log in"
+        static let yourPasswordText = "Forgot your password?"
+        static let checkVerificationText = "Check Verification"
+        static let texSupport = "Tex.Поддержка"
+        static let numberIphone = "+79007778888"
+        static let okTextButtonAlert = "OK"
+        static let cancelTextButtonAlert = "Cancel"
+        static let numberText = "Number"
+        static let mask = "+X (XXX) XXX-XX-XX"
+        static let password = "Password"
+    }
+
     @State var  passwordState = ""
     @State var text = ""
     @State var password: Bool = false
-    @FocusState private var psswordFocusState: Bool
+    @State var isAlert = false
+    @State private var minimumPasswordLength = 6
+    @State private var maximumPasswordLength = 15
+    @FocusState  var isFocus: Bool
+    @FocusState var transfer: Transfer?
+    
     
     var placeholder: String = ""
     var linkMainScreen = ContentView()
     var viewModelRegistration = RegistrationMainViewModel()
     
+    enum Transfer {
+        case oneNumber
+        case twoNumber
+    }
+    
     var body: some View {
-        VStack(spacing: 0) {
-            linkMainScreen.gradientLayer
+        VStack {
+            gradienColorNavigationBar
+                .frame(height: 70)
             ZStack {
                 rectangle
                 rectangleView
                 textField
                 settupButton
             }
+            .onTapGesture {
+                transfer = nil
+            }
         }
         .navigationBarBackButtonHidden(true)
+    }
+    
+    var gradienColorNavigationBar: some View {
+        LinearGradient(colors:
+                        [.numberOneColorGradient,
+                         .numberTwoColorGradient],
+                       startPoint: .top, endPoint: .bottom)
+        .ignoresSafeArea(.all, edges: .all)
+        
+    }
+    var settupButton: some View {
+        VStack(spacing: 24) {
+            Spacer()
+            Text(Constant.singUPText)
+                .frame(width: 300, height: 55)
+                .foregroundColor(.white)
+                .background(LinearGradient(gradient: Gradient(colors: [.numberOneColorGradient, .numberTwoColorGradient]), startPoint: .leading, endPoint: .trailing)).bold()
+                .cornerRadius(27)
+             .shadow(color: .colorShadow, radius: 1.5, x: 0, y: 4)
+
+            VStack(spacing: 18) {
+                Button(action: {
+                    isAlert = true
+                }) {
+                    Text(Constant.yourPasswordText)
+                        .font(.verdanaBold(size: 20))
+                }
+                .padding(.all)
+                NavigationLink(destination: VertificationScreen()) {
+                    Text(Constant.checkVerificationText)
+                        .font(.verdanaBold(size: 20))
+                        .padding(.bottom, 50)
+                }
+            }
+            .foregroundColor(.myGreen)
+            .alert(isPresented: $isAlert) {
+                Alert(title: Text(Constant.texSupport), message: Text(Constant.numberIphone), primaryButton: .default(Text(Constant.okTextButtonAlert), action: {
+                }), secondaryButton: .cancel(Text(Constant.cancelTextButtonAlert), action: {
+                }))
+            }
+        }
     }
     
     var rectangle: some View {
@@ -40,22 +111,22 @@ struct RegistrationScreen: View {
         }
     }
     
-    
     var rectangleView: some View {
         VStack{
             ZStack {
-                Image("ride")
-                Image("left")
+                Image(.ride)
+                Image(.left)
                     .offset(x: -76.0, y: 0.0)
                 HStack(spacing: 100) {
                     Group {
-                        Text("Log in")
-                        Text("Sing up")
+                        Text(Constant.loginText)
+                        Text(Constant.singUPText)
                     }
                     .makeGridient(colors: [.numberOneColorGradient, .numberTwoColorGradient], startPoint: .top, endPoint: .bottom)
                 }
                 .font(.system(size: 15))
                 .bold()
+
             }
             .padding(.top, 39)
             Spacer()
@@ -63,29 +134,18 @@ struct RegistrationScreen: View {
     }
     var textField: some View {
         VStack {
-            
-            
-//            var textFilds: some View {
-//                HStack(alignment: .center,  spacing: 8) {
-//                    TextField("", text: $viewModelVertificationScreen.firstTextField)
-//                        .focused($transfer, equals: .oneNumber)
-//                        .onChange(of: viewModelVertificationScreen.firstTextField) { _, newValue in
-//                            if newValue.count >= 1 {
-//                                transfer = .twoNumber
-//                            }
-//                        }
-//            
-//            
-//            
             VStack(alignment: .leading,  spacing: 40) {
-                Text("Number")
-                    .padding(.all)
+                Text(Constant.numberText)
                     .foregroundColor(.myGreen)
-                    .offset(y: 40)
+                    .offset(x: 10, y: 20)
                 HStack() {
                     TextField(placeholder, text: $text)
+                        .focused($transfer, equals: .oneNumber)
                         .onChange(of: text, { oldValue, newValue in
-                            text = viewModelRegistration.format(with: "+X (XXX) XXX-XXXX", phone: oldValue)
+                            text = viewModelRegistration.format(with: Constant.mask, phone: oldValue)
+                            if newValue.count > 18 {
+                                transfer = .twoNumber
+                            }
                         })
                         .keyboardType(.numberPad)
                         .foregroundColor(.myGreen)
@@ -98,18 +158,24 @@ struct RegistrationScreen: View {
             VStack(alignment: .leading,  spacing: 40) {
                 Text("Password")
                     .foregroundColor(.myGreen)
-                    .padding(.all)
-                
+                    .offset(x: 10, y: 20)
                 HStack() {
                     Group {
                         if password {
-                            TextField("Password", text: $passwordState,
-                                      prompt: Text("Password"))
+                            TextField(Constant.password, text: $passwordState)
                         } else {
-                            SecureField("Password", text: $passwordState,
-                                        prompt: Text("Password"))
+                            SecureField(Constant.password, text: $passwordState)
                         }
                     }
+                    .onChange(of: passwordState) { oldValue, newValue in
+                        if newValue.count < minimumPasswordLength {
+                            passwordState = String(newValue.prefix(minimumPasswordLength))
+                        } else if newValue.count > maximumPasswordLength {
+                            passwordState = String(newValue.prefix(maximumPasswordLength))
+                        }
+                    }
+                    
+                    .focused($transfer, equals: .twoNumber)
                     .padding(.bottom, 40)
                     .foregroundColor(.myGreen)
                     .font(.system(size: 20))
@@ -118,8 +184,8 @@ struct RegistrationScreen: View {
                     } label: {
                         Image( password ? ImageResource.see : ImageResource.noSee)
                     }
+                    .shadow(color: .colorShadow, radius: 1.5)
                     .padding(.bottom, 40)
-
                 }
             }
             .padding(.trailing)
@@ -129,24 +195,4 @@ struct RegistrationScreen: View {
         .padding(.bottom, 200)
     }
 }
-var settupButton: some View {
-    VStack(spacing: 24) {
-        Spacer()
-        Text("Sing Up")
-            .frame(width: 300, height: 55)
-            .foregroundColor(.white)
-            .background(LinearGradient(gradient: Gradient(colors: [.numberOneColorGradient, .numberTwoColorGradient]), startPoint: .leading, endPoint: .trailing)).bold()
-            .cornerRadius(27)
-        VStack(spacing: 18) {
-            Text("Forgot your password?")
-            NavigationLink(destination: VertificationScreen()) {
-                Text("Check Verification")
-            }
-        }
-        .foregroundColor(.myGreen)
-        .font(.system(size: 20))
-        .bold()
-        Divider().padding(.leading,70).padding(.trailing, 70)
-    }
-    .padding(.bottom, 95)
-}
+

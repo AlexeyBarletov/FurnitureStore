@@ -7,9 +7,7 @@
 
 import Foundation
 
-
  class VertificationScreenViewModel: ObservableObject {
-    
     @Published var list: [String] = []
     @Published var  firstTextField = ""
     @Published var seconTextField = ""

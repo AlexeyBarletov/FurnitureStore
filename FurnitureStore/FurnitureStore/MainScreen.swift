@@ -7,8 +7,18 @@
 
 
 import SwiftUI
-
 struct ContentView: View {
+    
+    enum Constan {
+        static let linkText = "169.ru"
+        static let getText = "Get Started"
+        static let urlText = "https://encrypted-tbn0.g00static.com/images?q=tbn:ANd9GcTuZkSVKI8fGbbe95vLuzwFPW9EguP-Gtih14VrrJnw2g&s"
+             //убрать 11 после буквы g
+        static let accounText = "Don't have an account?"
+        static let singInHere = "Sing in here"
+    }
+    
+    
     @State private var showSplash = true
     var body: some View {
         NavigationView {
@@ -22,23 +32,24 @@ struct ContentView: View {
     }
     var setupTextAndButtonView: some View {
         VStack(spacing: 40) {
-            Text("169.ru")
+            Text(Constan.linkText)
                 .font(.system(size: 40))
                 .foregroundColor(.white)
                 .bold()
             displayPicture
             Spacer()
             NavigationLink(destination: ProductDetails()) {
-                Text("Get Started")
+                Text(Constan.getText)
                     .frame(width: 300, height: 55)
                     .background(Color.white)
                     .overlay(
                         LinearGradient(gradient: Gradient(colors: [.numberOneColorGradient, .numberTwoColorGradient]),
                                        startPoint: .top,
                                        endPoint: .bottom)
-                        .mask(Text("Get Started")
+                        .mask(Text(Constan.getText)
                             .font(.system(size: 20).bold()
                                  )))
+                    .shadow(color: .colorShadow, radius: 1.5, x: 0, y: 4)
                     .foregroundColor(.clear)
                     .cornerRadius(27)
             }
@@ -48,7 +59,7 @@ struct ContentView: View {
     }
     
     var  displayPicture: some View {
-            AsyncImage(url: URL(string: "https://encrypted-tbn0.g11static.com/images?q=tbn:ANd9GcTuZkSVKI8fGbbe95vLuzwFPW9EguP-Gtih14VrrJnw2g&s")) { element in //убрать 11 после буквы g
+        AsyncImage(url: URL(string: Constan.urlText)) { element in
                 switch element {
             case .empty:
                 Image(.imageNew)
@@ -67,12 +78,12 @@ struct ContentView: View {
 
     var textLabel: some View {
         VStack(spacing: 12) {
-            Text("Don't have an account?")
+            Text(Constan.accounText)
                 .font(.system(size: 16))
                 .bold()
                 .foregroundStyle(.white)
             NavigationLink(destination: RegistrationScreen()) {
-                    Text("Sing in here")
+                Text(Constan.singInHere)
                     .font(.system(size: 28)).bold()
             }
                 Divider()
@@ -95,8 +106,8 @@ struct ContentView: View {
     }
 }
 #Preview {
-// ContentView()
-   RegistrationScreen()
-    // ProductDetails()
-// VertificationScreen()
+//ContentView()
+RegistrationScreen()
+     //ProductDetails()
+//VertificationScreen()
 }
