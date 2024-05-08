@@ -7,7 +7,6 @@
 
 import SwiftUI
 struct VertificationScreen: View {
-    
 
     enum Transfer {
         case oneNumber
@@ -36,7 +35,6 @@ struct VertificationScreen: View {
     @Environment(\.presentationMode) var presentationMode
     
     var link = ContentView()
-    
     var body: some View {
         VStack {
             ZStack {
@@ -74,7 +72,7 @@ struct VertificationScreen: View {
         VStack {
             Text(Constant.checkSMSMessage)
                 .font(.verdanaBold(size: 20))
-                .foregroundColor(.myGreen)
+                .foregroundColor(.myGrey)
                 .padding(.bottom, 7)
             
             Button(action: {
@@ -83,7 +81,7 @@ struct VertificationScreen: View {
             }) {
                 Text(Constant.resendSMS)
                     .font(.verdanaBold(size: 20))
-                    .foregroundColor(.myGreen)
+                    .foregroundColor(.myGrey)
             }
             
             Divider().padding(.trailing, 70).padding(.leading, 70)
@@ -114,16 +112,6 @@ struct VertificationScreen: View {
             Spacer()
         }
     }
-    
-    var gradienColorNavigationBar: some View {
-        LinearGradient(colors:
-                        [.numberOneColorGradient,
-                         .numberTwoColorGradient],
-                       startPoint: .top, endPoint: .bottom)
-        .ignoresSafeArea(.all, edges: .all)
-        
-    }
-    
     var setuText: some View {
         VStack {
             Image(.massage)
@@ -132,7 +120,7 @@ struct VertificationScreen: View {
                 .font(.verdana(size: 20))
         }
         .font(.verdana(size: 20))
-        .foregroundColor(.myGreen)
+        .foregroundColor(.myGrey)
         .padding(.horizontal)
     }
     
@@ -147,7 +135,7 @@ struct VertificationScreen: View {
                     }
                 }
                 .frame(width: 60, height: 60)
-                .border(Color.myGreen, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                .border(Color.myGrey, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             TextField("", text: $viewModelVertificationScreen.seconTextField)
                 .focused($transfer, equals: .twoNumber)
                 .onChange(of: viewModelVertificationScreen.seconTextField, { oldValue, newValue in
@@ -157,7 +145,7 @@ struct VertificationScreen: View {
                     }
                 })
                 .frame(width: 60, height: 60)
-                .border(Color.myGreen, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                .border(Color.myGrey, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             TextField("", text: $viewModelVertificationScreen.thirdTextField)
                 .frame(width: 60, height: 60)
                 .focused($transfer, equals: .thriNumber)
@@ -167,7 +155,7 @@ struct VertificationScreen: View {
                         viewModelVertificationScreen.thirdTextField = oldValue
                     }
                 })
-                .border(Color.myGreen, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                .border(Color.myGrey, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             TextField("", text: $viewModelVertificationScreen.fourthetxtField)
                 .focused($transfer, equals: .fourNumber)
                 .onChange(of: viewModelVertificationScreen.fourthetxtField, { oldValue, newValue in
@@ -177,7 +165,7 @@ struct VertificationScreen: View {
                     }
                 })
                 .frame(width: 60, height: 60)
-                .border(Color.myGreen, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                .border(Color.myGrey, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             
         }
         .multilineTextAlignment(.center)
@@ -193,7 +181,7 @@ struct VertificationScreen: View {
                 .font(.verdana(size: 16))
         }
         .font(.verdanaBold(size: 20))
-        .foregroundColor(.myGreen)
+        .foregroundColor(.myGrey)
         .padding(.horizontal)
         
     }

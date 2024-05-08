@@ -38,7 +38,7 @@ struct ContentView: View {
                 .bold()
             displayPicture
             Spacer()
-            NavigationLink(destination: ProductDetails()) {
+            NavigationLink(destination: TabBarView()) {
                 Text(Constan.getText)
                     .frame(width: 300, height: 55)
                     .background(Color.white)
@@ -104,10 +104,4 @@ struct ContentView: View {
                        startPoint: .top, endPoint: .bottom)
         .ignoresSafeArea(.all, edges: .all)
     }
-}
-#Preview {
-//ContentView()
-RegistrationScreen()
-     //ProductDetails()
-//VertificationScreen()
 }

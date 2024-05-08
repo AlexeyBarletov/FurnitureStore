@@ -51,7 +51,7 @@ struct ProductDetails: View {
         VStack() {
             HStack {
                 Text(Constant.sofaElda)
-                    .foregroundColor(.myGreen)
+                    .foregroundColor(.myGrey)
                     .bold()
                     .font(.system(size: 20))
                 Spacer()
@@ -72,7 +72,7 @@ struct ProductDetails: View {
                     Text(Constant.priceText)
                 }
             }
-            .foregroundColor(.myGreen)
+            .foregroundColor(.myGrey)
             .multilineTextAlignment(.leading)
             .bold()
         }

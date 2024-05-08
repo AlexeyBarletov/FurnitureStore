@@ -93,7 +93,7 @@ struct RegistrationScreen: View {
                         .padding(.bottom, 50)
                 }
             }
-            .foregroundColor(.myGreen)
+            .foregroundColor(.myGrey)
             .alert(isPresented: $isAlert) {
                 Alert(title: Text(Constant.texSupport), message: Text(Constant.numberIphone), primaryButton: .default(Text(Constant.okTextButtonAlert), action: {
                 }), secondaryButton: .cancel(Text(Constant.cancelTextButtonAlert), action: {
@@ -136,7 +136,7 @@ struct RegistrationScreen: View {
         VStack {
             VStack(alignment: .leading,  spacing: 40) {
                 Text(Constant.numberText)
-                    .foregroundColor(.myGreen)
+                    .foregroundColor(.myGrey)
                     .offset(x: 10, y: 20)
                 HStack() {
                     TextField(placeholder, text: $text)
@@ -148,7 +148,7 @@ struct RegistrationScreen: View {
                             }
                         })
                         .keyboardType(.numberPad)
-                        .foregroundColor(.myGreen)
+                        .foregroundColor(.myGrey)
                         .font(.system(size: 20))
                 }
                 .padding(.trailing, 5)
@@ -157,7 +157,7 @@ struct RegistrationScreen: View {
             }
             VStack(alignment: .leading,  spacing: 40) {
                 Text("Password")
-                    .foregroundColor(.myGreen)
+                    .foregroundColor(.myGrey)
                     .offset(x: 10, y: 20)
                 HStack() {
                     Group {
@@ -177,7 +177,7 @@ struct RegistrationScreen: View {
                     
                     .focused($transfer, equals: .twoNumber)
                     .padding(.bottom, 40)
-                    .foregroundColor(.myGreen)
+                    .foregroundColor(.myGrey)
                     .font(.system(size: 20))
                     Button {
                         password.toggle()
