@@ -63,12 +63,12 @@ struct FilterScreen: View {
     
     var scrollViewFilter: some View {
         ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
                 ForEach(listImigeMini.indices, id: \.self) { element in
                     ZStack {
-                    RoundedRectangle(cornerRadius: 24)
-                        .frame(width: 120, height: 80)
-                        .foregroundColor(.whiteLight)
+                        RoundedRectangle(cornerRadius: 24)
+                            .frame(width: 120, height: 80)
+                            .foregroundColor(.whiteLight)
                         Image(listImigeMini[element])
                             .frame(width: 50, height: 50)
                     }
