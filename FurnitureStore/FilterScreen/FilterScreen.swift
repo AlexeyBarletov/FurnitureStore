@@ -10,7 +10,18 @@ import SwiftUI
 
 struct FilterScreen: View {
     @Environment(\.presentationMode) var presentationMode
-     var listImigeMini = ["bedMini", "sofaMini", "armchairMini"]
+    @ObservedObject var viewModelFilter = FilterMainViewModel()
+    @State private var customSelection: ClosedRange<CGFloat> = 1000...5000
+    
+   @State var colorColoms: [GridItem] = [
+        .init(.flexible()),
+        .init(.flexible()),
+        .init(.flexible()),
+        .init(.flexible()),
+        .init(.flexible()),
+    ]
+
+    var listImigeMini = ["bedMini", "sofaMini", "armchairMini"]
     var body: some View {
         VStack {
             ZStack {
@@ -22,6 +33,7 @@ struct FilterScreen: View {
             textView
             scrollViewFilter
             sliderView
+            colorPurpleView
         }
         .navigationBarBackButtonHidden(true)
         Spacer()
@@ -76,11 +88,38 @@ struct FilterScreen: View {
             }
         }
     }
+    
     var sliderView: some View {
-        VStack {
-            Text("Prices")
-                .font(.verdanaBold(size: 24))
-                .foregroundStyle(.myGrey)
+        NavigationView {
+            VStack {
+                Text("Prices")
+                    .font(.verdana(size: 24))
+                    .foregroundStyle(.myGrey)
+                CustomSliderView()
+                }
+
+              }
+          }
+
+var colorPurpleView: some View {
+    LazyVGrid(columns: colorColoms, spacing: 16) {
+        ForEach(viewModelFilter.listColor.indices, id: \.self) { index in
+         makeCir
+        }
+        
+    }
+}
+    func makeCircleSectionColor(color: String, index: Int) -> some View {
+        Button {
+            viewModelFilter.makeColor(index)
+        } label: {
+            Circle()
+                .frame(width: 49, height: 40)
+                .foregroundStyle(Color(color))
+                .overlay {
+                    Circle()
+                        .stroke(.gray)
+        }
         }
     }
     
@@ -88,3 +127,4 @@ struct FilterScreen: View {
 #Preview {
     FilterScreen()
 }
+  
