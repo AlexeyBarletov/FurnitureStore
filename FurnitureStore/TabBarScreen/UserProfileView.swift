@@ -6,25 +6,8 @@
 //
 
 import SwiftUI
-
-struct ModelUserProfile: Identifiable {
-    let id = UUID()
-    let imageName: String
-    let title: String
-    var isCircleVisible: Bool
-    var circle: Int?
-    
-}
-
 struct UserProfileView: View {
-    
-    var listInfoUserProfile: [ModelUserProfile] = [
-        .init(imageName: "envelope", title: "Sity", isCircleVisible: true, circle: 3),
-        .init(imageName: "bell", title: "Notification", isCircleVisible: true, circle: 4),
-        .init(imageName: "human", title: "Accounts Details", isCircleVisible: false),
-        .init(imageName: "basket", title: "My purchases", isCircleVisible: false),
-        .init(imageName: "setting", title: "Setting", isCircleVisible: false)
-    ]
+    @ObservedObject var  userProfileViewModel = UserProfileViewModel()
     var body: some View{
         VStack {
             gradienColorNavigationBar
@@ -38,9 +21,8 @@ struct UserProfileView: View {
     }
     
     var infoUserProfileView: some View {
-        NavigationView {
             List {
-                ForEach(listInfoUserProfile) { element in
+                ForEach(userProfileViewModel.listInfoUserProfile) { element in
                     HStack {
                         Image(element.imageName)
                         Text(element.title)
@@ -54,7 +36,6 @@ struct UserProfileView: View {
                 }
             }
             .listStyle(.plain)
-        }
     }
     
     var avatarImageView: some View {
@@ -84,7 +65,7 @@ struct UserProfileView: View {
             ZStack {
                 Circle().frame(width: 25,height: 25)
                     .makeGridient(colors: [.numberOneColorGradient, .numberTwoColorGradient], startPoint: .top, endPoint: .bottom)
-                Text("3").foregroundStyle(.white)
+                Text("4").foregroundStyle(.white)
             }
         }
     }

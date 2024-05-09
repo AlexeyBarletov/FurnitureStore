@@ -13,33 +13,33 @@ struct TabBarView: View {
         }
     @State private var selectedTabIndex = 0
     var body: some View {
-        VStack {
-            TabView(selection: $selectedTabIndex) {
-                GoodsView()
-                    .tag(0)
-                    .tabItem {
-                        Image("houm")
-                            .renderingMode(.template)
-                            .foregroundColor(Color(.secondaryLabel))
-                    }
-              BasketView()
-                    .tag(1)
-                    .tabItem {
-                        Image("basket2")
-                            .renderingMode(.template)
-                            .foregroundColor(Color(.secondaryLabel))
-                    }
-                
-              UserProfileView()
-                    .tag(2)
-                    .tabItem {
-                        Image("smail")
-                            .renderingMode(.template)
-                            .foregroundColor(Color(.secondaryLabel))
-                    }
+            VStack {
+                TabView(selection: $selectedTabIndex) {
+                    GoodsView()
+                        .tag(0)
+                        .tabItem {
+                            Image("houm")
+                                .renderingMode(.template)
+                                .foregroundColor(Color(.secondaryLabel))
+                        }
+                    BasketView()
+                        .tag(1)
+                        .tabItem {
+                            Image("basket2")
+                                .renderingMode(.template)
+                                .foregroundColor(Color(.secondaryLabel))
+                        }
+                    
+                    UserProfileView()
+                        .tag(2)
+                        .tabItem {
+                            Image("smail")
+                                .renderingMode(.template)
+                                .foregroundColor(Color(.secondaryLabel))
+                        }
             }
+            .accentColor(.green)
         }
-        .accentColor(.green)
     }
 }
 #Preview {

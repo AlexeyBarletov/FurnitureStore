@@ -6,14 +6,17 @@
 //
 
 import Foundation
-struct GoodsModel {
+struct GoodsModel: Identifiable {
+    ///id
+    var id = UUID()
     /// название картинки
     var nameImage: String
     /// название дивана
     var nameText: String
     /// цена cо скидкой
-    var priceDiscount: String
+    var priceDiscount: Int
     /// цена без скидки
     var noPriceDiscount: String
-
+   ///  сумма товаров
+    var quantityProduct: Int
 }
