@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+/// Таб бар главного экрана
 struct TabBarView: View {
     init() {
            UITabBar.appearance().unselectedItemTintColor = .secondaryLabel
@@ -36,7 +37,9 @@ struct TabBarView: View {
                             Image("smail")
                                 .renderingMode(.template)
                                 .foregroundColor(Color(.secondaryLabel))
+                          
                         }
+                  
             }
             .accentColor(.green)
         }
@@ -45,4 +48,3 @@ struct TabBarView: View {
 #Preview {
     TabBarView()
 }
-

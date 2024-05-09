@@ -7,6 +7,7 @@
 
 import Foundation
 
+///Модель экрана Деталей
 class ProductDetalisMainViewModel: ObservableObject {
     
     @Published var totalCharacter = 0

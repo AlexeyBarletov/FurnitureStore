@@ -8,15 +8,15 @@
 import Foundation
 import SwiftUI
 
+///Модель для экрана фильтрации
 class FilterMainViewModel: ObservableObject {
-    @Published var nameColor = "Color"
-    @Published var listColor: [Color] = [.aqua, .azure, .cadetBlue,
-                                         .cornflowerBlue, .darkKhaki, .darkOliveGreen,
-                                         .dimGrey, .khaki, .lavender, .lemonChiffon, .maroon,
-                                         .mediumPurple, .mediumAquamarine, .mistyRose, .oliveDrab,
-                                         .peru,  .plum, .powderBlue, .rosyBrown, .teal ]
-
+    @Published var nameColor = "purple"
+    @Published var listColor: [String] = ["aqua", "azure", "cadetBlue",
+                                          "cornflowerBlue", "darkKhaki", "darkOliveGreen",
+                                         "dimGrey", "khaki", "lavender", "lemonChiffon", "maroon",
+                                          "mediumAquamarine", "mediumPurple", "mistyRose", "oliveDrab",
+                                         "peru",  "powderBlue", "azure", "rosyBrown", "myColorTeall"]
     func makeColor(_ index: Int) {
-        nameColor = "Color - \(listColor[index])"
+        nameColor = "\(listColor[index])"
     }
 }

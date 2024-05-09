@@ -13,14 +13,14 @@ struct FilterScreen: View {
     @ObservedObject var viewModelFilter = FilterMainViewModel()
     @State private var customSelection: ClosedRange<CGFloat> = 1000...5000
     
-   @State var colorColoms: [GridItem] = [
+    @State var colorColoms: [GridItem] = [
         .init(.flexible()),
         .init(.flexible()),
         .init(.flexible()),
         .init(.flexible()),
         .init(.flexible()),
     ]
-
+    
     var listImigeMini = ["bedMini", "sofaMini", "armchairMini"]
     var body: some View {
         VStack {
@@ -38,6 +38,7 @@ struct FilterScreen: View {
         .navigationBarBackButtonHidden(true)
         Spacer()
     }
+
     
     var textNavigationBar: some View {
         Text("Filters")
@@ -90,25 +91,30 @@ struct FilterScreen: View {
     }
     
     var sliderView: some View {
-        NavigationView {
             VStack {
                 Text("Prices")
                     .font(.verdana(size: 24))
                     .foregroundStyle(.myGrey)
                 CustomSliderView()
+                HStack {
+                    Text("Color -")
+                    Text(viewModelFilter.nameColor)
+                    .padding(.all)
+                    Spacer()
                 }
-
-              }
-          }
-
-var colorPurpleView: some View {
-    LazyVGrid(columns: colorColoms, spacing: 16) {
-        ForEach(viewModelFilter.listColor.indices, id: \.self) { index in
-         makeCir
-        }
-        
+                .font(.verdanaBold(size: 24))
+                .foregroundStyle(.myGrey)
+            }
     }
-}
+    
+    var colorPurpleView: some View {
+        LazyVGrid(columns: colorColoms, spacing: 16) {
+            ForEach(viewModelFilter.listColor.indices, id: \.self) { index in
+                makeCircleSectionColor(color: viewModelFilter.listColor[index], index: index)
+            }
+            
+        }
+    }
     func makeCircleSectionColor(color: String, index: Int) -> some View {
         Button {
             viewModelFilter.makeColor(index)
@@ -119,7 +125,7 @@ var colorPurpleView: some View {
                 .overlay {
                     Circle()
                         .stroke(.gray)
-        }
+                }
         }
     }
     
@@ -127,4 +133,4 @@ var colorPurpleView: some View {
 #Preview {
     FilterScreen()
 }
-  
+

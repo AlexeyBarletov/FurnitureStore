@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+///Структура для отображения карзины
 struct BasketView: View {
     var body: some View{
         Text("BasketView")

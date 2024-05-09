@@ -7,6 +7,7 @@
 
 
 import SwiftUI
+///Cтруктура для отображения Контента
 struct ContentView: View {
     
     enum Constan {
@@ -17,7 +18,6 @@ struct ContentView: View {
         static let accounText = "Don't have an account?"
         static let singInHere = "Sing in here"
     }
-    
     
     @State private var showSplash = true
     var body: some View {
@@ -30,6 +30,7 @@ struct ContentView: View {
             }
         }
     }
+    
     var setupTextAndButtonView: some View {
         VStack(spacing: 40) {
             Text(Constan.linkText)

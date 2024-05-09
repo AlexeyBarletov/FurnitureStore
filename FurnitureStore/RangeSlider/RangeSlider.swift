@@ -25,7 +25,6 @@ struct CustomSliderView: View {
     }
 }
 
-
 struct RangeSliderView: View {
     @Binding var selection: ClosedRange<CGFloat>
     var range: ClosedRange<CGFloat>
@@ -40,7 +39,7 @@ struct RangeSliderView: View {
         GeometryReader { reader in
             let maxSliderWidth = reader.size.width - 30
             let minimumDistance = minimumDistance == 0 ? 0 : (minimumDistance /
-            (range.upperBound - range.lowerBound)) * maxSliderWidth
+                                                              (range.upperBound - range.lowerBound)) * maxSliderWidth
             ZStack(alignment: .leading) {
                 Capsule()
                     .fill(tint.tertiary)
@@ -98,9 +97,9 @@ struct RangeSliderView: View {
                 let maxWidth = reader.size.width - 30
                 
                 let start = selection.lowerBound.interpolate(inputRange:
-                [range.lowerBound,range.upperBound],outputRange: [0,maxWidth])
+                                                                [range.lowerBound,range.upperBound],outputRange: [0,maxWidth])
                 let end = selection.upperBound.interpolate(inputRange:
-                [range.lowerBound,range.upperBound],outputRange: [0,maxWidth])
+                                                            [range.lowerBound,range.upperBound],outputRange: [0,maxWidth])
                 
                 slider1.offset = start
                 slider1.lastStoredOffset = start

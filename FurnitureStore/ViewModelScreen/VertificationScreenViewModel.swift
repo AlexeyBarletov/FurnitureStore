@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Модель представления экрана верификации.
  class VertificationScreenViewModel: ObservableObject {
     @Published var list: [String] = []
     @Published var  firstTextField = ""

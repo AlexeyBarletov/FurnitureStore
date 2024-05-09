@@ -19,4 +19,6 @@ struct GoodsModel: Identifiable {
     var noPriceDiscount: String
    ///  сумма товаров
     var quantityProduct: Int
+    /// переменная Boll
+    var isBoll: Bool
 }

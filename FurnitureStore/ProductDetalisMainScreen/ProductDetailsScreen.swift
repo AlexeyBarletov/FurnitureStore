@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ProductDetails: View {
-    
     enum Constant {
         static let buyNowText = "Buy now"
         static let sofaElda = "Sofa Elda 900"
@@ -18,14 +17,10 @@ struct ProductDetails: View {
         static let progressViewText = "Description: A sofa in a modern style is furniture without lush ornate decor. It has a simple or even futuristic appearance and sleek design."
         static let reviewText = "Review"
     }
-    
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModelProductDetalis =  ProductDetalisMainViewModel()
-    
-    init() {
-        UITextView.appearance().backgroundColor = .clear
-    }
-    
+    var productDetaliModel: GoodsModel
+
     var body: some View {
         VStack {
             setupLabelButton
@@ -50,7 +45,7 @@ struct ProductDetails: View {
     var setupLabelButton: some View {
         VStack() {
             HStack {
-                Text(Constant.sofaElda)
+                Text(productDetaliModel.nameText)
                     .foregroundColor(.myGrey)
                     .bold()
                     .font(.system(size: 20))
@@ -64,12 +59,13 @@ struct ProductDetails: View {
                 }
             }
             .padding(.all)
-            Image(.sofa)
+            Image(productDetaliModel.nameImage)
+                .frame(width: 300, height: 177)
             HStack {
                 Spacer()
                 ZStack {
                     Image(.rectangle)
-                    Text(Constant.priceText)
+                    Text("$\(productDetaliModel.priceDiscount)")
                 }
             }
             .foregroundColor(.myGrey)

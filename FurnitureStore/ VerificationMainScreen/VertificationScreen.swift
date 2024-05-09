@@ -6,13 +6,18 @@
 //
 
 import SwiftUI
+/// Экран Вертификации
 struct VertificationScreen: View {
 
     enum Transfer {
-        case oneNumber
-        case twoNumber
-        case thriNumber
-        case fourNumber
+        ///кейс номер 1
+        case firstNumber
+        ///кейс номер 2
+        case secondNumber
+        ///кейс номер 3
+        case thirdNumber
+        ///кейс номер 4 
+        case fourthNumber
     }
     
     enum Constant {
@@ -127,9 +132,9 @@ struct VertificationScreen: View {
     var textFilds: some View {
         HStack(alignment: .center,  spacing: 8) {
             TextField("", text: $viewModelVertificationScreen.firstTextField)
-                .focused($transfer, equals: .oneNumber)
+                .focused($transfer, equals: .firstNumber)
                 .onChange(of: viewModelVertificationScreen.firstTextField) { oldValue, newValue in
-                    transfer = .twoNumber
+                    transfer = .secondNumber
                     if newValue.count > 1 {
                         viewModelVertificationScreen.firstTextField = oldValue
                     }
@@ -137,9 +142,9 @@ struct VertificationScreen: View {
                 .frame(width: 60, height: 60)
                 .border(Color.myGrey, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             TextField("", text: $viewModelVertificationScreen.seconTextField)
-                .focused($transfer, equals: .twoNumber)
+                .focused($transfer, equals: .secondNumber)
                 .onChange(of: viewModelVertificationScreen.seconTextField, { oldValue, newValue in
-                    transfer = .thriNumber
+                    transfer = .thirdNumber
                     if newValue.count > 1 {
                         viewModelVertificationScreen.seconTextField = oldValue
                     }
@@ -148,16 +153,16 @@ struct VertificationScreen: View {
                 .border(Color.myGrey, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             TextField("", text: $viewModelVertificationScreen.thirdTextField)
                 .frame(width: 60, height: 60)
-                .focused($transfer, equals: .thriNumber)
+                .focused($transfer, equals: .thirdNumber)
                 .onChange(of: viewModelVertificationScreen.thirdTextField, { oldValue, newValue in
-                    transfer = .fourNumber
+                    transfer = .fourthNumber
                     if newValue.count > 1 {
                         viewModelVertificationScreen.thirdTextField = oldValue
                     }
                 })
                 .border(Color.myGrey, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
             TextField("", text: $viewModelVertificationScreen.fourthetxtField)
-                .focused($transfer, equals: .fourNumber)
+                .focused($transfer, equals: .fourthNumber)
                 .onChange(of: viewModelVertificationScreen.fourthetxtField, { oldValue, newValue in
                     transfer = nil
                     if newValue.count > 1 {

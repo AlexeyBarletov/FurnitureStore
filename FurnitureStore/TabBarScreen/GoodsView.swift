@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+///Структура для отображения товаров
 struct GoodsView: View {
+    
     @ObservedObject var  goodsScreenViewModel = GoodsScreenViewModel()
     @State var textFild = ""
     @State var quantities = [Int]()
+
     var body: some View{
+        NavigationView {
             VStack {
                 ZStack {
                     gradienColorNavigationBar
@@ -22,9 +26,11 @@ struct GoodsView: View {
                 roundRectangleView
                     .padding()
                 scrollView
+                    .shadow(color: .black.opacity(0.25), radius: 4,  y: 4)
             }
-            .navigationBarBackButtonHidden(true)
+        }
     }
+    
     var textFildView: some View {
         HStack {
             TextField("Search...", text: $textFild)
@@ -32,7 +38,6 @@ struct GoodsView: View {
                 .frame(width: 312, height: 48)
                 .background(.white)
                 .cornerRadius(24)
-            
         }
     }
     
@@ -41,12 +46,13 @@ struct GoodsView: View {
             Image(.glass)
                 .padding(.leading, 50)
             Spacer()
-                NavigationLink(destination: FilterScreen()) {
-                        Image("filter")
+            NavigationLink(destination: FilterScreen()) {
+                Image("filter")
                     .padding(.trailing, 10)
             }
         }
     }
+    
     var visualElementForniture: some View {
         HStack {
             Image("sofa1")
@@ -79,62 +85,73 @@ struct GoodsView: View {
                 Text("Your total price")
                     .foregroundStyle(.myGrey)
                     .padding(.horizontal)
-                Text("1999$")
+                Text("\(goodsScreenViewModel.totalPrice)")
+                
                     .font(.verdanaBold(size: 22))
                     .foregroundStyle(.myGrey)
             }
         }
+
     }
     
     var scrollView: some View {
         ScrollView(.vertical, showsIndicators: false) {
             ForEach(goodsScreenViewModel.listInfoFurniture.indices, id: \.self) { furniture in
-                VStack {
-                   HStack {
-                       Image(goodsScreenViewModel.listInfoFurniture[furniture].nameImage)
-                            .frame(width: 140, height: 140)
-                        
-                        VStack(alignment: .leading) {
-                            Text(goodsScreenViewModel.listInfoFurniture[furniture].nameText)
-                                .font(.verdanaBold(size: 22))
-                                .foregroundColor(.myGrey)
-                            
-                            HStack {
-                                Text("$\(goodsScreenViewModel.listInfoFurniture[furniture].priceDiscount)")
-                                    .font(.verdanaBold(size: 24))
-                                    .foregroundStyle(.myColorGreen)
-                                
-                                Text("$\(goodsScreenViewModel.listInfoFurniture[furniture].noPriceDiscount)")
-                                    .foregroundStyle(.myGrey)
-                                    .font(.verdana(size: 24))
-                                    .strikethrough(true, color: .black)
-                            }
-                            VStack {
-                                ZStack {
-                                    RoundedRectangle(cornerRadius: 24)
-                                                .frame(width: 115, height: 40)
-                                                .foregroundColor(.myColorRectangle)
-                                            HStack {
-                                                Button(action: {
-                                                    goodsScreenViewModel.listInfoFurniture[furniture].quantityProduct -= 1
-                                                }) {
-                                                    Image(systemName: "minus")
-                                                }
-                                                Text("\(goodsScreenViewModel.listInfoFurniture[furniture].quantityProduct)")
-                                                    .padding()
-                                                Button(action: {
-                                                    goodsScreenViewModel.listInfoFurniture[furniture].quantityProduct += 1
-                                          
-                                                }) {
-                                                    Image(systemName: "plus")
-                                                }
-                                            }
+                    LazyVStack {
+                        HStack {
+                            Image(goodsScreenViewModel.listInfoFurniture[furniture].nameImage)
+                                .frame(width: 140, height: 140)
+                            VStack(alignment: .leading) {
+                                Text(goodsScreenViewModel.listInfoFurniture[furniture].nameText)
+                                    .font(.verdanaBold(size: 22))
                                     .foregroundColor(.myGrey)
-                                    .font(.verdanaBold(size: 18))
+                                
+                                HStack {
+                                    Text("$\(goodsScreenViewModel.listInfoFurniture[furniture].priceDiscount)")
+                                        .font(.verdanaBold(size: 24))
+                                        .foregroundStyle(.myColorGreen)
+                                    
+                                    Text("$\(goodsScreenViewModel.listInfoFurniture[furniture].noPriceDiscount)")
+                                        .foregroundStyle(.myGrey)
+                                        .font(.verdana(size: 24))
+                                        .strikethrough(true, color: .black)
                                 }
-                            }                       
+                                VStack {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 24)
+                                            .frame(width: 115, height: 40)
+                                            .foregroundColor(.myColorRectangle)
+
+                                        HStack {
+                                            Button(action: {
+                                                goodsScreenViewModel.makeResultPlus(param: furniture)
+                                            }) {
+                                                Image(systemName: "minus")
+                                            }
+                                            Text("\(goodsScreenViewModel.listInfoFurniture[furniture].quantityProduct)")
+                                                .padding()
+                                            Button(action: {
+                                                goodsScreenViewModel.makeResultMinus(param: furniture)
+                                            }) {
+                                                Image(systemName: "plus")
+                                            }
+                                        }
+                                        .foregroundColor(.myGrey)
+                                        .font(.verdanaBold(size: 18))
+                                    }
+
+                                }
+                            }
                         }
                     }
+
+                    .onTapGesture {
+                        goodsScreenViewModel.listInfoFurniture[furniture].isBoll.toggle()
+
+                    }
+                    .fullScreenCover(isPresented: $goodsScreenViewModel.listInfoFurniture[furniture].isBoll, content: {
+                        ProductDetails(productDetaliModel: goodsScreenViewModel.listInfoFurniture[furniture])
+                    })
                     .frame(maxWidth: .infinity)
                     .padding()
                     .background(Color.white)
@@ -145,7 +162,6 @@ struct GoodsView: View {
             }
         }
     }
+#Preview {
+    TabBarView()
 }
-//#Preview {
-//    TabBarView()
-//}

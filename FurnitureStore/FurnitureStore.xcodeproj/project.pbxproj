@@ -23,6 +23,8 @@
 		739927EC2BEA479A00328E61 /* VertificationScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739927EB2BEA479A00328E61 /* VertificationScreenViewModel.swift */; };
 		739927EE2BEA47B000328E61 /* RegistrationMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739927ED2BEA47B000328E61 /* RegistrationMainViewModel.swift */; };
 		739927F02BEA47F000328E61 /* ProductDetalisMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739927EF2BEA47F000328E61 /* ProductDetalisMainViewModel.swift */; };
+		73AAD3612BED3746002D26CF /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AAD3602BED3746002D26CF /* UIImage + Extension.swift */; };
+		73AAD3642BED5AFF002D26CF /* AccountScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AAD3632BED5AFF002D26CF /* AccountScreen.swift */; };
 		73E70FCE2BEBC9160005A307 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E70FCD2BEBC9160005A307 /* UserProfileView.swift */; };
 		73E70FD02BEBD8570005A307 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E70FCF2BEBD8570005A307 /* TabBarView.swift */; };
 		73E70FD22BEBD8AB0005A307 /* GoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E70FD12BEBD8AB0005A307 /* GoodsView.swift */; };
@@ -50,6 +52,8 @@
 		739927EB2BEA479A00328E61 /* VertificationScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertificationScreenViewModel.swift; sourceTree = "<group>"; };
 		739927ED2BEA47B000328E61 /* RegistrationMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationMainViewModel.swift; sourceTree = "<group>"; };
 		739927EF2BEA47F000328E61 /* ProductDetalisMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetalisMainViewModel.swift; sourceTree = "<group>"; };
+		73AAD3602BED3746002D26CF /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
+		73AAD3632BED5AFF002D26CF /* AccountScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreen.swift; sourceTree = "<group>"; };
 		73E70FCD2BEBC9160005A307 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		73E70FCF2BEBD8570005A307 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		73E70FD12BEBD8AB0005A307 /* GoodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsView.swift; sourceTree = "<group>"; };
@@ -89,6 +93,7 @@
 		73456AA52BE8F9F30090DC20 = {
 			isa = PBXGroup;
 			children = (
+				73AAD3622BED5AF5002D26CF /* SettingsView */,
 				736E57BD2BECC45400CCD37B /* RangeSlider */,
 				732E197C2BEC418B00FF164E /* FilterScreen */,
 				73E70FD52BEBE15F0005A307 /* Model */,
@@ -151,6 +156,7 @@
 			children = (
 				7372EA952BE936C000C193D7 /* Extension + Grdient.swift */,
 				7372EA972BE9764300C193D7 /* Extension + Font.swift */,
+				73AAD3602BED3746002D26CF /* UIImage + Extension.swift */,
 			);
 			path = "Extension ";
 			sourceTree = "<group>";
@@ -174,6 +180,14 @@
 				73E7FB782BED01770061C67D /* FilterMainViewModel.swift */,
 			);
 			path = ViewModelScreen;
+			sourceTree = "<group>";
+		};
+		73AAD3622BED5AF5002D26CF /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				73AAD3632BED5AFF002D26CF /* AccountScreen.swift */,
+			);
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 		73E70FCC2BEBC9000005A307 /* TabBarScreen */ = {
@@ -267,6 +281,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73E70FD42BEBD9230005A307 /* BasketView.swift in Sources */,
+				73AAD3642BED5AFF002D26CF /* AccountScreen.swift in Sources */,
 				73456AB42BE8F9F30090DC20 /* MainScreen.swift in Sources */,
 				739927EC2BEA479A00328E61 /* VertificationScreenViewModel.swift in Sources */,
 				73E70FD02BEBD8570005A307 /* TabBarView.swift in Sources */,
@@ -285,6 +300,7 @@
 				7372EA982BE9764300C193D7 /* Extension + Font.swift in Sources */,
 				732E197E2BEC419F00FF164E /* FilterScreen.swift in Sources */,
 				73456AB22BE8F9F30090DC20 /* FurnitureStoreApp.swift in Sources */,
+				73AAD3612BED3746002D26CF /* UIImage + Extension.swift in Sources */,
 				732E19792BEC3E3300FF164E /* UserProfileViewModel.swift in Sources */,
 				73E7FB792BED01770061C67D /* FilterMainViewModel.swift in Sources */,
 			);

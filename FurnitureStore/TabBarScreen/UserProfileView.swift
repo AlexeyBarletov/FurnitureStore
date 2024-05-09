@@ -6,67 +6,102 @@
 //
 
 import SwiftUI
+
 struct UserProfileView: View {
-    @ObservedObject var  userProfileViewModel = UserProfileViewModel()
-    var body: some View{
-        VStack {
-            gradienColorNavigationBar
-                .frame(height: 70)
-            avatarImageView
-            labelNameView
-            locationlElementView
-            infoUserProfileView
-            
-        }
+    
+    @ObservedObject var viewModel = UserProfileViewModel()
+    
+    @State private var isShowingSettingsScreen = false
+    @State private var isShowingSityScreen = false
+    
+    var body: some View {
+            VStack {
+                gradienColorNavigationBar
+                    .frame(height: 70)
+                avatarImageView
+                labelNameView
+                locationlElementView
+                infoUserProfileView
+                Divider()
+                    .background(Color(red: 218 / 255, green: 217 / 255, blue: 209 / 255))
+                    .frame(width: 375, height: 1)
+            }
+
     }
     
     var infoUserProfileView: some View {
-            List {
-                ForEach(userProfileViewModel.listInfoUserProfile) { element in
+        List {
+            ForEach(viewModel.listInfoUserProfile) { element in
+                if element.title == "Setting" {
+                    NavigationLink(destination: AccountScreen()) {
+                        HStack {
+                            Image(element.imageName)
+                            Text(element.title)
+                            if element.circle >= 1 {
+                                circleView(param: element.circle)
+                            }
+                        }
+                        .font(.verdana(size: 20))
+                        .foregroundColor(.gray)
+                        .padding(.horizontal)
+                      
+                    }
+
+                } else {
                     HStack {
                         Image(element.imageName)
                         Text(element.title)
-                        if element.isCircleVisible {
-                            circleView
+                        if element.circle >= 1 {
+                            circleView(param: element.circle)
                         }
                     }
-                    .font(.custom("Verdana", size: 20))
+                    .font(.verdana(size: 20))
                     .foregroundColor(.gray)
                     .padding(.horizontal)
+                    
                 }
             }
-            .listStyle(.plain)
+        }
+        .listStyle(.plain)
+
     }
     
     var avatarImageView: some View {
-        Image(.avatar)
+        Image("avatar")
             .frame(width: 150, height: 150)
     }
     
     var labelNameView: some View {
         Text("Your Name")
-            .font(.verdana(size: 24))
+            .font(.custom("Verdana", size: 24))
             .bold()
-            .foregroundStyle(.myGrey)
+            .foregroundColor(.gray)
     }
     
     var locationlElementView: some View {
         HStack {
-            Image(.location)
-            Text("Sity")
-                .font(.verdana(size: 20))
-                .foregroundStyle(.myGrey)
+            Image("location")
+            Text("City")
+                .font(.custom("Verdana", size: 20))
+                .foregroundColor(.gray)
         }
     }
     
-    var circleView: some View {
+    func circleView(param: Int) -> some View {
         HStack {
             Spacer()
             ZStack {
-                Circle().frame(width: 25,height: 25)
-                    .makeGridient(colors: [.numberOneColorGradient, .numberTwoColorGradient], startPoint: .top, endPoint: .bottom)
-                Text("4").foregroundStyle(.white)
+                Circle()
+                    .frame(width: 25, height: 25)
+                    .makeGridient(colors: [.numberTwoColorGradient, .numberOneColorGradient], startPoint: .bottom, endPoint: .top)
+                Text("\(param)")
+                    .foregroundColor(.white)
             }
         }
     }
 }
+
+#Preview {
+    UserProfileView()
+}
+

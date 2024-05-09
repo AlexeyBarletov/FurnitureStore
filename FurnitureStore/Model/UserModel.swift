@@ -6,16 +6,14 @@
 //
 
 import Foundation
-
+///Модель экрана профиля
 struct ModelUserProfile: Identifiable {
-    ///id
+    /// id
     let id = UUID()
-    ///название картинки
+    /// название картинки
     let imageName: String
-    ///текс
+    /// текст
     let title: String
-    ///
-    var isCircleVisible: Bool
-    var circle: Int?
-    
+    /// круг
+    var circle: Int
 }
