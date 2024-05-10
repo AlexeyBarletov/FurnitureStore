@@ -6,6 +6,7 @@
 //
 
 import Foundation
+///Модель для хранения товаров
 struct GoodsModel: Identifiable {
     ///id
     var id = UUID()

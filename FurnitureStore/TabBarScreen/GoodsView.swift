@@ -9,6 +9,17 @@ import SwiftUI
 ///Структура для отображения товаров
 struct GoodsView: View {
     
+    enum Constant {
+        static let placeholderText = "Search..."
+        static let sofaText = "Sofa"
+        static let discountPriceText = "999$"
+        static let priceText = "2000$"
+        static let generalPriceText = "Your total price"
+        static let systemNameImageMinus = "minus"
+        static let systemNameImagePlus = "plus"
+
+    }
+    
     @ObservedObject var  goodsScreenViewModel = GoodsScreenViewModel()
     @State var textFild = ""
     @State var quantities = [Int]()
@@ -33,7 +44,7 @@ struct GoodsView: View {
     
     var textFildView: some View {
         HStack {
-            TextField("Search...", text: $textFild)
+            TextField(Constant.placeholderText, text: $textFild)
                 .padding(.leading, 40)
                 .frame(width: 312, height: 48)
                 .background(.white)
@@ -47,7 +58,7 @@ struct GoodsView: View {
                 .padding(.leading, 50)
             Spacer()
             NavigationLink(destination: FilterScreen()) {
-                Image("filter")
+                Image(.filter)
                     .padding(.trailing, 10)
             }
         }
@@ -55,20 +66,20 @@ struct GoodsView: View {
     
     var visualElementForniture: some View {
         HStack {
-            Image("sofa1")
+            Image(.sofa1)
                 .frame(width: 140, height: 140)
             
             VStack {
-                Text("Sofa")
+                Text(Constant.sofaText)
                     .font(.verdanaBold(size: 22))
                     .foregroundColor(.myGrey)
                 Spacer()
                 HStack {
-                    Text("999$")
+                    Text(Constant.discountPriceText)
                         .font(.verdanaBold(size: 24))
                         .foregroundStyle(.myColorGreen)
                     
-                    Text("2000$")
+                    Text(Constant.priceText)
                         .foregroundStyle(.myGrey)
                         .font(.verdana(size: 24))
                         .strikethrough(true, color: .black)
@@ -79,10 +90,10 @@ struct GoodsView: View {
     
     var roundRectangleView: some View {
         ZStack {
-            Image("rectangle1")
+            Image(.rectangle1)
                 .offset(x: 46)
             HStack {
-                Text("Your total price")
+                Text(Constant.generalPriceText)
                     .foregroundStyle(.myGrey)
                     .padding(.horizontal)
                 Text("\(goodsScreenViewModel.totalPrice)")
@@ -126,20 +137,19 @@ struct GoodsView: View {
                                             Button(action: {
                                                 goodsScreenViewModel.makeResultPlus(param: furniture)
                                             }) {
-                                                Image(systemName: "minus")
+                                                Image(systemName: Constant.systemNameImageMinus)
                                             }
                                             Text("\(goodsScreenViewModel.listInfoFurniture[furniture].quantityProduct)")
                                                 .padding()
                                             Button(action: {
                                                 goodsScreenViewModel.makeResultMinus(param: furniture)
                                             }) {
-                                                Image(systemName: "plus")
+                                                Image(systemName: Constant.systemNameImagePlus)
                                             }
                                         }
                                         .foregroundColor(.myGrey)
                                         .font(.verdanaBold(size: 18))
                                     }
-
                                 }
                             }
                         }

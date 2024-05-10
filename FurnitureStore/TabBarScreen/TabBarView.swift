@@ -19,14 +19,14 @@ struct TabBarView: View {
                     GoodsView()
                         .tag(0)
                         .tabItem {
-                            Image("houm")
+                            Image(.houm)
                                 .renderingMode(.template)
                                 .foregroundColor(Color(.secondaryLabel))
                         }
                     BasketView()
                         .tag(1)
                         .tabItem {
-                            Image("basket2")
+                            Image(.basket2)
                                 .renderingMode(.template)
                                 .foregroundColor(Color(.secondaryLabel))
                         }
@@ -34,13 +34,14 @@ struct TabBarView: View {
                     UserProfileView()
                         .tag(2)
                         .tabItem {
-                            Image("smail")
+                            Image(.smail)
                                 .renderingMode(.template)
                                 .foregroundColor(Color(.secondaryLabel))
                           
                         }
                   
             }
+                .navigationBarBackButtonHidden(true)
             .accentColor(.green)
         }
     }

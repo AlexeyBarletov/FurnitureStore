@@ -7,7 +7,14 @@
 
 import SwiftUI
 
+///Структура для отображения информации о пользователи
 struct UserProfileView: View {
+    
+    enum Constant {
+        static let settingText = "Setting"
+        static let yourNameText = "Your Name"
+        static let cityText = "City"
+    }
     
     @ObservedObject var viewModel = UserProfileViewModel()
     
@@ -26,13 +33,12 @@ struct UserProfileView: View {
                     .background(Color(red: 218 / 255, green: 217 / 255, blue: 209 / 255))
                     .frame(width: 375, height: 1)
             }
-
     }
     
     var infoUserProfileView: some View {
         List {
             ForEach(viewModel.listInfoUserProfile) { element in
-                if element.title == "Setting" {
+                if element.title == Constant.settingText {
                     NavigationLink(destination: AccountScreen()) {
                         HStack {
                             Image(element.imageName)
@@ -46,7 +52,6 @@ struct UserProfileView: View {
                         .padding(.horizontal)
                       
                     }
-
                 } else {
                     HStack {
                         Image(element.imageName)
@@ -58,7 +63,6 @@ struct UserProfileView: View {
                     .font(.verdana(size: 20))
                     .foregroundColor(.gray)
                     .padding(.horizontal)
-                    
                 }
             }
         }
@@ -67,22 +71,22 @@ struct UserProfileView: View {
     }
     
     var avatarImageView: some View {
-        Image("avatar")
+        Image(.avatar)
             .frame(width: 150, height: 150)
     }
     
     var labelNameView: some View {
-        Text("Your Name")
-            .font(.custom("Verdana", size: 24))
+        Text(Constant.yourNameText)
+            .font(.verdana(size: 24))
             .bold()
             .foregroundColor(.gray)
     }
     
     var locationlElementView: some View {
         HStack {
-            Image("location")
-            Text("City")
-                .font(.custom("Verdana", size: 20))
+            Image(.location)
+            Text(Constant.cityText)
+                .font(.verdana(size: 20))
                 .foregroundColor(.gray)
         }
     }
