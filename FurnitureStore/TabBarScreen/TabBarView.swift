@@ -12,6 +12,7 @@ struct TabBarView: View {
     init() {
            UITabBar.appearance().unselectedItemTintColor = .secondaryLabel
         }
+    
     @State private var selectedTabIndex = 0
     var body: some View {
             VStack {
@@ -23,6 +24,7 @@ struct TabBarView: View {
                                 .renderingMode(.template)
                                 .foregroundColor(Color(.secondaryLabel))
                         }
+                    
                     BasketView()
                         .tag(1)
                         .tabItem {
