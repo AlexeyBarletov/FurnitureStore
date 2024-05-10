@@ -172,6 +172,3 @@ struct GoodsView: View {
             }
         }
     }
-#Preview {
-    TabBarView()
-}

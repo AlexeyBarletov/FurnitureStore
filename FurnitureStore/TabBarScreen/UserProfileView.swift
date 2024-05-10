@@ -39,7 +39,7 @@ struct UserProfileView: View {
         List {
             ForEach(viewModel.listInfoUserProfile) { element in
                 if element.title == Constant.settingText {
-                    NavigationLink(destination: AccountScreen()) {
+                    NavigationLink(destination: PaymentScreen()) {
                         HStack {
                             Image(element.imageName)
                             Text(element.title)
@@ -103,9 +103,5 @@ struct UserProfileView: View {
             }
         }
     }
-}
-
-#Preview {
-    UserProfileView()
 }
 

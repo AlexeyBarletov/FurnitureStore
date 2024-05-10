@@ -19,4 +19,8 @@ extension Font {
     static func verdana(size: CGFloat) -> Font {
         return Font.custom("Verdana", size: size)
     }
+    
+    static func inter(size: CGFloat) -> Font {
+        return Font.custom("Inter", size: size)
+    }
 }

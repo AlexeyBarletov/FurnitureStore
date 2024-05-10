@@ -8,7 +8,6 @@
 import SwiftUI
 import UIKit
 
-
 struct RegistrationScreen: View {
     
     enum Constant {
