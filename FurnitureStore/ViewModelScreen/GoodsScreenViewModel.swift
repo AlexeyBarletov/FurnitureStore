@@ -32,6 +32,5 @@ class GoodsScreenViewModel: ObservableObject {
             totalPrice -= listInfoFurniture[param].priceDiscount
             listInfoFurniture[param].quantityProduct -= 1
         }
-
     }
 }

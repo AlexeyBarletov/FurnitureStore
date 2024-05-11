@@ -21,6 +21,12 @@ extension Font {
     }
     
     static func inter(size: CGFloat) -> Font {
-        return Font.custom("Inter", size: size)
+        return Font.custom("Inter-Regular", size: size)
+    }
+    static func interItalic(size: CGFloat) -> Font {
+        return Font.custom("Inter-Italic", size: size)
+    }
+    static func interBold(size: CGFloat) -> Font {
+        return Font.custom("Inter-Bold", size: size)
     }
 }
