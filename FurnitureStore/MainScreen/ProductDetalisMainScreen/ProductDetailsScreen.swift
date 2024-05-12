@@ -7,6 +7,9 @@
 
 import SwiftUI
 
+   
+    
+  
 struct ProductDetails: View {
     enum Constant {
         static let buyNowText = "Buy now"
@@ -20,13 +23,30 @@ struct ProductDetails: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModelProductDetalis =  ProductDetalisMainViewModel()
     var productDetaliModel: GoodsModel
+    
+    @State var isDragging = false
+      @State var currentOffsetX: CGFloat = 0
+      @State var tapped = false
+      @State private var scale: CGFloat = 1.0
+      
 
     var body: some View {
         VStack {
             setupLabelButton
             setupProgresView
+            
         }
         .navigationBarBackButtonHidden(true)
+    }
+    
+    var long: some Gesture {
+        LongPressGesture(minimumDuration: 2)
+            .onEnded { _ in
+                withAnimation {
+                    self.tapped.toggle()
+                    
+                }
+            }
     }
     
     var buttonView: some View {
@@ -121,3 +141,6 @@ struct ProductDetails: View {
     }
 }
 
+#Preview {
+    ProductDetails( productDetaliModel: .init(nameImage: "", nameText: "", priceDiscount: 1, noPriceDiscount: "", quantityProduct: 3, isBoll: true))
+}

@@ -33,7 +33,6 @@ struct RegistrationScreen: View {
     @FocusState  var isFocus: Bool
     @FocusState var transfer: Transfer?
     
-    
     var placeholder: String = ""
     var linkMainScreen = ContentView()
     var viewModelRegistration = RegistrationMainViewModel()

@@ -37,6 +37,9 @@
 		73456AB42BE8F9F30090DC20 /* MainScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73456AB32BE8F9F30090DC20 /* MainScreen.swift */; };
 		73456AB62BE8F9F50090DC20 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73456AB52BE8F9F50090DC20 /* Assets.xcassets */; };
 		73456AB92BE8F9F50090DC20 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73456AB82BE8F9F50090DC20 /* Preview Assets.xcassets */; };
+		7366DEB82BF0FBE30029BD49 /* PaymentScreenSecond.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366DEB72BF0FBE30029BD49 /* PaymentScreenSecond.swift */; };
+		7366DEBA2BF11C2D0029BD49 /* AnimationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366DEB92BF11C2D0029BD49 /* AnimationMap.swift */; };
+		7366DEBC2BF158870029BD49 /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7366DEBB2BF158870029BD49 /* PaymentViewModel.swift */; };
 		736E57BF2BECC46400CCD37B /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736E57BE2BECC46400CCD37B /* RangeSlider.swift */; };
 		7372EA8C2BE904A300C193D7 /* RegistrationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7372EA8B2BE904A300C193D7 /* RegistrationScreen.swift */; };
 		7372EA962BE936C000C193D7 /* Extension + Grdient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7372EA952BE936C000C193D7 /* Extension + Grdient.swift */; };
@@ -46,7 +49,7 @@
 		739927EE2BEA47B000328E61 /* RegistrationMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739927ED2BEA47B000328E61 /* RegistrationMainViewModel.swift */; };
 		739927F02BEA47F000328E61 /* ProductDetalisMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739927EF2BEA47F000328E61 /* ProductDetalisMainViewModel.swift */; };
 		73AAD3612BED3746002D26CF /* UIImage + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AAD3602BED3746002D26CF /* UIImage + Extension.swift */; };
-		73AAD3642BED5AFF002D26CF /* PaymentScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AAD3632BED5AFF002D26CF /* PaymentScreen.swift */; };
+		73AAD3642BED5AFF002D26CF /* PaymentScreenFirst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73AAD3632BED5AFF002D26CF /* PaymentScreenFirst.swift */; };
 		73E70FCE2BEBC9160005A307 /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E70FCD2BEBC9160005A307 /* UserProfileView.swift */; };
 		73E70FD02BEBD8570005A307 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E70FCF2BEBD8570005A307 /* TabBarView.swift */; };
 		73E70FD22BEBD8AB0005A307 /* GoodsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E70FD12BEBD8AB0005A307 /* GoodsView.swift */; };
@@ -89,6 +92,9 @@
 		73456AB32BE8F9F30090DC20 /* MainScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreen.swift; sourceTree = "<group>"; };
 		73456AB52BE8F9F50090DC20 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73456AB82BE8F9F50090DC20 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		7366DEB72BF0FBE30029BD49 /* PaymentScreenSecond.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreenSecond.swift; sourceTree = "<group>"; };
+		7366DEB92BF11C2D0029BD49 /* AnimationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationMap.swift; sourceTree = "<group>"; };
+		7366DEBB2BF158870029BD49 /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		736E57BE2BECC46400CCD37B /* RangeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		7372EA8B2BE904A300C193D7 /* RegistrationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationScreen.swift; sourceTree = "<group>"; };
 		7372EA952BE936C000C193D7 /* Extension + Grdient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension + Grdient.swift"; sourceTree = "<group>"; };
@@ -98,7 +104,7 @@
 		739927ED2BEA47B000328E61 /* RegistrationMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationMainViewModel.swift; sourceTree = "<group>"; };
 		739927EF2BEA47F000328E61 /* ProductDetalisMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetalisMainViewModel.swift; sourceTree = "<group>"; };
 		73AAD3602BED3746002D26CF /* UIImage + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage + Extension.swift"; sourceTree = "<group>"; };
-		73AAD3632BED5AFF002D26CF /* PaymentScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreen.swift; sourceTree = "<group>"; };
+		73AAD3632BED5AFF002D26CF /* PaymentScreenFirst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentScreenFirst.swift; sourceTree = "<group>"; };
 		73E70FCD2BEBC9160005A307 /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		73E70FCF2BEBD8570005A307 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		73E70FD12BEBD8AB0005A307 /* GoodsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsView.swift; sourceTree = "<group>"; };
@@ -271,6 +277,7 @@
 				73E70FDC2BEC15C70005A307 /* GoodsScreenViewModel.swift */,
 				732E19782BEC3E3300FF164E /* UserProfileViewModel.swift */,
 				73E7FB782BED01770061C67D /* FilterMainViewModel.swift */,
+				7366DEBB2BF158870029BD49 /* PaymentViewModel.swift */,
 			);
 			path = ViewModelScreen;
 			sourceTree = "<group>";
@@ -278,7 +285,9 @@
 		73AAD3622BED5AF5002D26CF /* PaymentMainScreen */ = {
 			isa = PBXGroup;
 			children = (
-				73AAD3632BED5AFF002D26CF /* PaymentScreen.swift */,
+				7366DEB72BF0FBE30029BD49 /* PaymentScreenSecond.swift */,
+				73AAD3632BED5AFF002D26CF /* PaymentScreenFirst.swift */,
+				7366DEB92BF11C2D0029BD49 /* AnimationMap.swift */,
 			);
 			path = PaymentMainScreen;
 			sourceTree = "<group>";
@@ -395,10 +404,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				73E70FD42BEBD9230005A307 /* BasketView.swift in Sources */,
-				73AAD3642BED5AFF002D26CF /* PaymentScreen.swift in Sources */,
+				73AAD3642BED5AFF002D26CF /* PaymentScreenFirst.swift in Sources */,
 				73456AB42BE8F9F30090DC20 /* MainScreen.swift in Sources */,
 				739927EC2BEA479A00328E61 /* VertificationScreenViewModel.swift in Sources */,
 				73E70FD02BEBD8570005A307 /* TabBarView.swift in Sources */,
+				7366DEBA2BF11C2D0029BD49 /* AnimationMap.swift in Sources */,
 				73E70FD22BEBD8AB0005A307 /* GoodsView.swift in Sources */,
 				736E57BF2BECC46400CCD37B /* RangeSlider.swift in Sources */,
 				739927E72BEA221500328E61 /* VertificationScreen.swift in Sources */,
@@ -406,11 +416,13 @@
 				7372EA962BE936C000C193D7 /* Extension + Grdient.swift in Sources */,
 				732E19772BEC3DF600FF164E /* UserModel.swift in Sources */,
 				73E70FDB2BEC14AE0005A307 /* GoodsModel.swift in Sources */,
+				7366DEBC2BF158870029BD49 /* PaymentViewModel.swift in Sources */,
 				7372EA8C2BE904A300C193D7 /* RegistrationScreen.swift in Sources */,
 				739927EE2BEA47B000328E61 /* RegistrationMainViewModel.swift in Sources */,
 				739927F02BEA47F000328E61 /* ProductDetalisMainViewModel.swift in Sources */,
 				73E70FCE2BEBC9160005A307 /* UserProfileView.swift in Sources */,
 				73E70FDD2BEC15C70005A307 /* GoodsScreenViewModel.swift in Sources */,
+				7366DEB82BF0FBE30029BD49 /* PaymentScreenSecond.swift in Sources */,
 				7309F0E22BEFC116002F8C4C /* PaymentScreenViewModel.swift in Sources */,
 				7372EA982BE9764300C193D7 /* Extension + Font.swift in Sources */,
 				732E197E2BEC419F00FF164E /* FilterScreen.swift in Sources */,
