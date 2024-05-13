@@ -18,13 +18,11 @@ struct PaymentScreenFirst: View {
     @State private var isYearDatePicker = false
     @State private var showingAlert = false
     @State private var showingAlertInfoDeveloper = false
-        @State var isFlipped = false
     @State var paymentScreenSecond = PaymentScreenSecond()
-
+    
     var viewModelRegistration = RegistrationMainViewModel()
     let mask = "XXXX-XXXX-XXXX-XXXX"
     var placeholder: String = "0000 0000 0000 0000"
-   @ObservedObject var paymentViewModel = PaymentViewModel()
     
     var yearRange = 2024...3005
     private let minimumPasswordLength = 3
@@ -34,13 +32,17 @@ struct PaymentScreenFirst: View {
     @State private var  selectedYear = 2021
     @State private var cvcPassword = false
     
+    @State var isFlipped = false
+    @State private var animate3d = false
+    
+    
+    
     var body: some View {
         VStack {
             ZStack {
                 gradienColorNavigationBar
                     .frame(height: 70)
                 backView
-                textViewPayment
             }
             ScrollView {
                 VStack {
@@ -57,16 +59,7 @@ struct PaymentScreenFirst: View {
                 .padding(.top, 20)
         }
         Spacer()
-       .navigationBarBackButtonHidden(true)
-    }
-    
-    var textViewPayment: some View {
-        VStack {
-            Text("Payment")
-                .frame(maxWidth: .infinity)
-                .font(.verdanaBold(size: 20))
-                .foregroundColor(.white).bold()
-        }
+            .navigationBarBackButtonHidden(true)
     }
     
     var rectangleView: some View {
@@ -82,11 +75,18 @@ struct PaymentScreenFirst: View {
     
     var backView: some View {
         HStack {
-            Image(.chevronLeft)
             Spacer()
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss().self
             }) {
+                Image(.chevronLeft)
+                
+            }
+            VStack {
+                Text("Payment")
+                    .frame(maxWidth: .infinity)
+                    .font(.verdanaBold(size: 20))
+                    .foregroundColor(.white).bold()
             }
         }
     }
@@ -115,6 +115,7 @@ struct PaymentScreenFirst: View {
                 }
             }
         }
+        .padding()
         .font(.verdana(size: 20))
         .foregroundStyle(.myGrey)
         .tint(.black)
@@ -132,46 +133,42 @@ struct PaymentScreenFirst: View {
                         secondTextFieldText = viewModelRegistration.format(with: "XXXX-XXXX-XXXX-XXXX", phone: newValue)
                     }
                 }
+                .keyboardType(.numberPad)
             Divider()
         }
-        .keyboardType(.numberPad)
         .padding(.all)
         .font(.custom("Verdana-Bold", size: 20))
         .foregroundColor(.gray)
     }
     
-
+    
     var gradientView: some View {
         ZStack {
             Group {
                 RoundedRectangle(cornerRadius: 20)
                     .frame(width: 310, height: 180)
                     .makeGridient(colors: [.numberTwoColorGradient, .numberOneColorGradient], startPoint: .bottom, endPoint: .top)
-                HStack {
-                    Image(.world)
-                }
-                .padding(.leading, 210)
-                .padding(.bottom, 140)
-                textVisualComponentsView()
-                    .opacity(isFlipped ? 0 : 1)
+                    
+                    .overlay {
+                        ZStack {
+                            textVisualComponentsView()
+                                .opacity(isFlipped ? 0 : 1)
+                            PaymentScreenSecond()
+                                .opacity(isFlipped ? 1 : 0)
+                            HStack {
+                                Image(.world)
+                            }
+                            .padding(.leading, 210)
+                            .padding(.bottom, 140)
+                        }
+                    }
+                    .onTapGesture {
+                        withAnimation {
+                            animate3d.toggle()
+                        }
+                    }
+                    .modifier(FlipEffect(flipped: $isFlipped, angle: animate3d ? 180 : 0, axis: (x: 1, y: 0)))
             }
-            .rotation3DEffect(
-                        .degrees(isFlipped ? 180 : 0),
-                        axis: (x: 0, y: 1, z: 0)
-                    )
-
-            if isFlipped {
-                paymentScreenSecond.textVisualComponentsSecondView()
-                    .opacity(isFlipped ? 1 : 0)
-            }
-        }
-        .animation(isFlipped ? .linear.delay(0.20) : .linear(duration: 2), value: isFlipped)
-        .padding()
-        .onTapGesture {
-            withAnimation {
-                isFlipped.toggle()
-            }
-            
         }
     }
     
@@ -212,6 +209,7 @@ struct PaymentScreenFirst: View {
             Text("CVC")
                 .font(.verdanaBold(size: 20))
                 .foregroundStyle(.myGrey)
+                .padding(.horizontal, 10)
             Spacer()
         }
     }
@@ -246,7 +244,7 @@ struct PaymentScreenFirst: View {
         }
         .keyboardType(.numberPad)
         .multilineTextAlignment(.leading)
-   
+        
     }
     
     var buttonView: some View {

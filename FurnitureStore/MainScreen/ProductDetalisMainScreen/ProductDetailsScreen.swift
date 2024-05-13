@@ -4,12 +4,8 @@
 //
 //  Created by Алексей Барлетов on 06.05.2024.
 //
-
 import SwiftUI
 
-   
-    
-  
 struct ProductDetails: View {
     enum Constant {
         static let buyNowText = "Buy now"
@@ -20,32 +16,34 @@ struct ProductDetails: View {
         static let progressViewText = "Description: A sofa in a modern style is furniture without lush ornate decor. It has a simple or even futuristic appearance and sleek design."
         static let reviewText = "Review"
     }
+    
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModelProductDetalis =  ProductDetalisMainViewModel()
     var productDetaliModel: GoodsModel
     
     @State var isDragging = false
-      @State var currentOffsetX: CGFloat = 0
-      @State var tapped = false
-      @State private var scale: CGFloat = 1.0
-      
+    @State var currentOffsetX: CGFloat = 0
+    @State var tapped = false
+    @State private var scale: CGFloat = 1.0
+    @State private var magnification: CGFloat = 1.0
 
+    
     var body: some View {
         VStack {
             setupLabelButton
             setupProgresView
-            
         }
         .navigationBarBackButtonHidden(true)
     }
     
-    var long: some Gesture {
-        LongPressGesture(minimumDuration: 2)
+    
+    var magnificationGesture: some Gesture {
+        MagnificationGesture()
+            .onChanged { value in
+                scale = magnification * value
+            }
             .onEnded { _ in
-                withAnimation {
-                    self.tapped.toggle()
-                    
-                }
+                magnification = scale
             }
     }
     
@@ -81,6 +79,9 @@ struct ProductDetails: View {
             .padding(.all)
             Image(productDetaliModel.nameImage)
                 .frame(width: 300, height: 177)
+                .scaleEffect(scale)
+                .gesture(magnificationGesture)
+           
             HStack {
                 Spacer()
                 ZStack {
@@ -92,6 +93,7 @@ struct ProductDetails: View {
             .multilineTextAlignment(.leading)
             .bold()
         }
+        
     }
     
     var setupProgresView: some View {
@@ -131,9 +133,9 @@ struct ProductDetails: View {
                     .cornerRadius(25)
                     .scrollContentBackground(.hidden)
                 Text("\(viewModelProductDetalis.totalCharacter) /300")
-                    .onChange(of: viewModelProductDetalis.textFieldZero, { oldValue, newValue in
+                    .onChange(of: viewModelProductDetalis.textFieldZero) { oldValue, newValue in
                         viewModelProductDetalis.makeCharacters(newValue: newValue, oldValue: oldValue)
-                    })
+                    }
             }
             .font(.verdana(size: 14))
             .foregroundColor(.white)
@@ -141,6 +143,5 @@ struct ProductDetails: View {
     }
 }
 
-#Preview {
-    ProductDetails( productDetaliModel: .init(nameImage: "aa", nameText: "aa", priceDiscount: 1, noPriceDiscount: "aa", quantityProduct: 3, isBoll: true))
-}
+
+

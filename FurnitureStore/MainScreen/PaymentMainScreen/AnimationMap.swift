@@ -10,26 +10,19 @@ import SwiftUI
 
 struct AnimationMap: View {
     @State var isFlipped = false
+    @State private var animate3d = false
+
     var body: some View {
+        
         ZStack{
-            MyCradLeft()
-                .rotation3DEffect(
-                    .degrees(isFlipped ? 0 : -90),
-                      axis: (x: 0.0, y: 1.0, z: 0.0)
-                )
-                .animation(isFlipped ? .linear.delay(0.35) : .linear, value: isFlipped)
-            
-            MyCradRide()
-                .rotation3DEffect(
-                    .degrees(isFlipped ? 90 : 0),
-                      axis: (x: 0.0, y: 1.0, z: 0.0)
-                )
-                .animation(isFlipped ? .linear : .linear.delay(0.35), value: isFlipped)
-                    
+            MyCradLeft().opacity(isFlipped ? 0.0 : 1.0)
+            MyCradRide().opacity(isFlipped ? 1.0 : 0.0)
+
         }
+        .modifier(FlipEffect(flipped: $isFlipped, angle: animate3d ? 180 : 0, axis: (x: 1, y: 0)))
         .onTapGesture {
-            withAnimation(.easeIn) {
-                isFlipped.toggle()
+            withAnimation(.linear(duration: 0.8)) {
+                animate3d.toggle()
             }
         }
     }
@@ -42,8 +35,8 @@ struct MyCradLeft: View {
             RoundedRectangle(cornerRadius: 20)
                 .frame(width: 310, height: 180)
                 .background(.red)
-
-            
+            Text("MyCradLeft")
+                .foregroundColor(.white)
         }
     }
 }
@@ -54,9 +47,12 @@ struct MyCradRide: View {
                 RoundedRectangle(cornerRadius: 20)
                     .frame(width: 310, height: 180)
                     .makeGridient(colors: [.numberOneColorGradient, .numberTwoColorGradient], startPoint: .top, endPoint: .bottom)
+                Text("MyCradRide")
+                    .foregroundColor(.white)
         }
     }
 }
+
 #Preview {
     AnimationMap()
 }

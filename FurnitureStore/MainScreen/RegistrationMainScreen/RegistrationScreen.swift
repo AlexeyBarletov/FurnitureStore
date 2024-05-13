@@ -9,7 +9,6 @@ import SwiftUI
 import UIKit
 
 struct RegistrationScreen: View {
-    
     enum Constant {
       static let singUPText = "Sing Up"
         static let loginText = "Log in"
@@ -22,21 +21,22 @@ struct RegistrationScreen: View {
         static let numberText = "Number"
         static let mask = "+X (XXX) XXX-XX-XX"
         static let password = "Password"
+     
     }
-
     @State var  passwordState = ""
     @State var text = ""
     @State var password: Bool = false
     @State var isAlert = false
     @State private var minimumPasswordLength = 6
     @State private var maximumPasswordLength = 15
-    @FocusState  var isFocus: Bool
     @FocusState var transfer: Transfer?
-    
+    @State var attempts: Int = 0
+    @State var isPasswordValid: Bool = false
+
     var placeholder: String = ""
     var linkMainScreen = ContentView()
     var viewModelRegistration = RegistrationMainViewModel()
-    
+
     enum Transfer {
         case oneNumber
         case twoNumber
@@ -47,10 +47,14 @@ struct RegistrationScreen: View {
             gradienColorNavigationBar
                 .frame(height: 70)
             ZStack {
+                
                 rectangle
                 rectangleView
                 textField
                 settupButton
+                imageErrorView
+                    .offset(y: 20)
+
             }
             .onTapGesture {
                 transfer = nil
@@ -58,7 +62,7 @@ struct RegistrationScreen: View {
         }
         .navigationBarBackButtonHidden(true)
     }
-    
+
     var gradienColorNavigationBar: some View {
         LinearGradient(colors:
                         [.numberOneColorGradient,
@@ -70,7 +74,15 @@ struct RegistrationScreen: View {
     var settupButton: some View {
         VStack(spacing: 24) {
             Spacer()
-            Text(Constant.singUPText)
+            Button(action: {
+                if !isPasswordValid || text.count < 18 {
+                    withAnimation {
+                        self.attempts += 1
+                    }
+                }
+            }) {
+                Text(Constant.singUPText)
+            }
                 .frame(width: 300, height: 55)
                 .foregroundColor(.white)
                 .background(LinearGradient(gradient: Gradient(colors: [.numberOneColorGradient, .numberTwoColorGradient]), startPoint: .leading, endPoint: .trailing)).bold()
@@ -98,6 +110,13 @@ struct RegistrationScreen: View {
                 }))
             }
         }
+    }
+    
+    var imageErrorView: some View {
+        Text("Enter correct data ")
+            .opacity( isPasswordValid && text.count == 18  ? 0 : 1)
+            .font(.interBold(size: 20))
+            .foregroundStyle(.red)
     }
     
     var rectangle: some View {
@@ -138,11 +157,14 @@ struct RegistrationScreen: View {
                     .offset(x: 10, y: 20)
                 HStack() {
                     TextField(placeholder, text: $text)
+                    
+                        .modifier(Shake(animatableData: CGFloat(attempts)))
                         .focused($transfer, equals: .oneNumber)
                         .onChange(of: text, { oldValue, newValue in
                             text = viewModelRegistration.format(with: Constant.mask, phone: oldValue)
                             if newValue.count > 18 {
                                 transfer = .twoNumber
+                                
                             }
                         })
                         .keyboardType(.numberPad)
@@ -165,11 +187,17 @@ struct RegistrationScreen: View {
                             SecureField(Constant.password, text: $passwordState)
                         }
                     }
+                    .modifier(Shake(animatableData: CGFloat(attempts)))
+                    
                     .onChange(of: passwordState) { oldValue, newValue in
                         if newValue.count < minimumPasswordLength {
                             passwordState = String(newValue.prefix(minimumPasswordLength))
+                            isPasswordValid = false
                         } else if newValue.count > maximumPasswordLength {
                             passwordState = String(newValue.prefix(maximumPasswordLength))
+                            isPasswordValid = false
+                        } else  {
+                            isPasswordValid = true
                         }
                     }
                     
@@ -194,3 +222,18 @@ struct RegistrationScreen: View {
     }
 }
 
+struct Shake: GeometryEffect {
+    var amount: CGFloat = 10
+    var shakesPerUnit = 3
+    var animatableData: CGFloat
+
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        ProjectionTransform(CGAffineTransform(translationX:
+            amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),
+            y: 0))
+    }
+}
+
+#Preview {
+    RegistrationScreen()
+}

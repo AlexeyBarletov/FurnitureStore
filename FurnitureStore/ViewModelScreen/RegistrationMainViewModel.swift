@@ -7,6 +7,9 @@
 import SwiftUI
 ///Модель экрана регистрации
 class RegistrationMainViewModel: ObservableObject {
+    
+    
+    
     func format(with mask: String, phone: String) -> String {
            let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
            var result = ""
