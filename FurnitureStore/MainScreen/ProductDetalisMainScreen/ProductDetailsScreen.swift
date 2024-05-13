@@ -142,5 +142,5 @@ struct ProductDetails: View {
 }
 
 #Preview {
-    ProductDetails( productDetaliModel: .init(nameImage: "", nameText: "", priceDiscount: 1, noPriceDiscount: "", quantityProduct: 3, isBoll: true))
+    ProductDetails( productDetaliModel: .init(nameImage: "aa", nameText: "aa", priceDiscount: 1, noPriceDiscount: "aa", quantityProduct: 3, isBoll: true))
 }

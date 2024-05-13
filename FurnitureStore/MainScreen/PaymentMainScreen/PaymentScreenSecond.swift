@@ -51,3 +51,6 @@ struct PaymentScreenSecond: View {
     }
 }
 
+//#Preview {
+//    PaymentScreenSecond()
+//}

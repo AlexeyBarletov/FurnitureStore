@@ -73,7 +73,6 @@ struct PaymentScreenFirst: View {
         HStack {
             Rectangle()
                 .frame(width: 150, height: 1)
-            
             Spacer()
             Rectangle()
                 .frame(width: 150, height: 1)
@@ -83,7 +82,7 @@ struct PaymentScreenFirst: View {
     
     var backView: some View {
         HStack {
-            Image(systemName: "chevron.left")
+            Image(.chevronLeft)
             Spacer()
             Button(action: {
                 self.presentationMode.wrappedValue.dismiss().self
@@ -166,12 +165,13 @@ struct PaymentScreenFirst: View {
                     .opacity(isFlipped ? 1 : 0)
             }
         }
-        .animation(isFlipped ? .linear.delay(0.35) : .linear, value: isFlipped)
+        .animation(isFlipped ? .linear.delay(0.20) : .linear(duration: 2), value: isFlipped)
         .padding()
         .onTapGesture {
             withAnimation {
                 isFlipped.toggle()
             }
+            
         }
     }
     
@@ -279,3 +279,6 @@ struct PaymentScreenFirst: View {
     }
 }
 
+#Preview {
+    PaymentScreenFirst()
+}

@@ -16,7 +16,7 @@ struct ContentView: View {
     enum Constan {
         static let linkText = "169.ru"
         static let getText = "Get Started"
-        static let urlText = "https://cdn0.divan.ru/img/v1/0w-6odEIc8zexLNYUQ2ieys72OnOVzQVewEZM1sq6ek/rs:fit:1920:1440:0:0/g:ce:0:0/bg:ffffff/q:85/czM6Ly9kaXZhbi93aWtpLWFydGljbGUvNTAyMzkzOS5qcGc.jpg"
+        static let urlText = "https://cdn0.divan.ru/img/v1/0w-6odEIc8zexLNYUQ2ieys2OnOVzQVewEZM1sq6ek/rs:fit:1920:1440:0:0/g:ce:0:0/bg:ffffff/q:85/czM6Ly9kaXZhbi93aWtpLWFydGljbGUvNTAyMzkzOS5qcGc.jpg"
         static let accounText = "Don't have an account?"
         static let singInHere = "Sign in here"
     }
@@ -35,9 +35,9 @@ struct ContentView: View {
                             .edgesIgnoringSafeArea(.all)
                             .overlay(
                                 ProgressView("Loading...")
-                                   .progressViewStyle(CircularProgressViewStyle(tint: .blue))
-                                    .scaleEffect(1.5)
-                            )
+                                    .progressViewStyle(CircularProgressViewStyle(tint: .blue))
+                                    .scaleEffect(1.0)
+                        )
                     }
                 }
             }
@@ -49,7 +49,7 @@ struct ContentView: View {
                     }
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    withAnimation(.easeInOut(duration: 5.0)) {
+                    withAnimation(.spring(duration: 5.0)) {
                         showSignInText = true
                     }
                 }
@@ -108,14 +108,14 @@ struct ContentView: View {
         AsyncImage(url: URL(string: Constan.urlText)) { element in
             switch element {
             case .empty:
-                Image(systemName: "photo")
+                Image(.imageNew)
             case .success(let image):
                 image
                     .resizable()
                     .frame(width: 296, height: 212)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
             case .failure(_):
-                Image(systemName: "photo")
+                Image(.imageNew)
             @unknown default:
                 fatalError()
             }
@@ -146,9 +146,5 @@ struct ContentView: View {
         LinearGradient(colors: [.numberOneColorGradient, .numberTwoColorGradient], startPoint: .top, endPoint: .bottom)
             .ignoresSafeArea(.all, edges: .all)
     }
-}
-
-#Preview {
-    ContentView()
 }
 
