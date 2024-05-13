@@ -39,9 +39,7 @@ struct TabBarView: View {
                             Image(.smail)
                                 .renderingMode(.template)
                                 .foregroundColor(Color(.secondaryLabel))
-                          
                         }
-                  
             }
                 .navigationBarBackButtonHidden(true)
             .accentColor(.green)
