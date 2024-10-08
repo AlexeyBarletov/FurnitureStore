@@ -38,7 +38,7 @@ struct FilterScreen: View {
         .navigationBarBackButtonHidden(true)
         Spacer()
     }
-
+    
     
     var textNavigationBar: some View {
         Text("Filters")
@@ -91,20 +91,20 @@ struct FilterScreen: View {
     }
     
     var sliderView: some View {
-            VStack {
-                Text("Prices")
-                    .font(.verdana(size: 24))
-                    .foregroundStyle(.myGrey)
-                CustomSliderView()
-                HStack {
-                    Text("Color -")
-                    Text(viewModelFilter.nameColor)
-                    .padding(.all)
-                    Spacer()
-                }
-                .font(.verdanaBold(size: 24))
+        VStack {
+            Text("Prices")
+                .font(.verdana(size: 24))
                 .foregroundStyle(.myGrey)
+            CustomSliderView()
+            HStack {
+                Text("Color -")
+                Text(viewModelFilter.nameColor)
+                    .padding(.all)
+                Spacer()
             }
+            .font(.verdanaBold(size: 24))
+            .foregroundStyle(.myGrey)
+        }
     }
     
     var colorPurpleView: some View {
@@ -125,10 +125,9 @@ struct FilterScreen: View {
                 .overlay {
                     Circle()
                         .stroke(.gray)
-                }
+            }
         }
     }
-    
 }
 #Preview {
     FilterScreen()
